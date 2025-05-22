@@ -7,7 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function handleNavbarScroll() {
     if (pageHeader) {
+      // Controleer of pageHeader bestaat
       if (window.scrollY > 50) {
+        // Verander 50 naar gewenste scrollafstand
         pageHeader.classList.add("scrolled");
       } else {
         pageHeader.classList.remove("scrolled");
@@ -15,14 +17,17 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // Functie voor actieve link markering bij scrollen
   function highlightActiveLink() {
     let currentSectionId = "";
+    // Gebruik een kleine offset om de detectie te verbeteren wanneer een sectie net in beeld komt
     const scrollPosition =
       window.scrollY + navbarHeight + Math.min(50, window.innerHeight / 3);
 
     sections.forEach((section) => {
       const sectionTop = section.offsetTop;
       const sectionHeight = section.offsetHeight;
+      // Controleer of de scrollpositie binnen de grenzen van de sectie valt
       if (
         scrollPosition >= sectionTop &&
         scrollPosition < sectionTop + sectionHeight
@@ -31,9 +36,10 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
+    // Speciale behandeling voor de hero sectie als deze bovenaan staat
     if (
-      window.scrollY < sections[0].offsetTop - navbarHeight - 50 &&
       sections.length > 0 &&
+      window.scrollY < sections[0].offsetTop - navbarHeight - 50 &&
       sections[0].id === "hero"
     ) {
       currentSectionId = "hero";
@@ -41,18 +47,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
     navMenuLinks.forEach((link) => {
       link.classList.remove("active-link");
+      // Controleer of de href van de link (na de #) overeenkomt met de huidige sectie ID
       if (link.getAttribute("href") === `#${currentSectionId}`) {
         link.classList.add("active-link");
       }
     });
   }
 
+  // Event listeners voor scrollen
   window.addEventListener("scroll", () => {
     handleNavbarScroll();
     highlightActiveLink();
   });
-  handleNavbarScroll(); // Initiele check
-  highlightActiveLink(); // Initiele check
+  // Initiele check bij laden van de pagina
+  handleNavbarScroll();
+  highlightActiveLink();
 
   // --- Mobiele Navigatie ---
   const hamburger = document.querySelector(".hamburger-menu");
@@ -64,7 +73,9 @@ document.addEventListener("DOMContentLoaded", function () {
       hamburger.classList.toggle("active");
     });
 
+    // Sluit mobiel menu wanneer op een link wordt geklikt
     navLinksContainer.querySelectorAll("a.nav-link").forEach((link) => {
+      // Specifieker naar .nav-link
       link.addEventListener("click", () => {
         if (navLinksContainer.classList.contains("active")) {
           navLinksContainer.classList.remove("active");
@@ -80,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
     currentYearSpan.textContent = new Date().getFullYear();
   }
 
-  // --- Testimonial Carousel (bestaande code) ---
+  // --- Testimonial Carousel ---
   const carouselWrapper = document.querySelector(
     ".testimonial-carousel-wrapper"
   );
@@ -98,28 +109,34 @@ document.addEventListener("DOMContentLoaded", function () {
     function updateSlidePosition() {
       const carousel = document.querySelector(".testimonial-carousel");
       if (!carousel) return;
+
       const viewportWidth = carousel.offsetWidth;
       const activeSlide = slides[currentSlideIndex];
       if (!activeSlide) return;
+
       const slideStyle = getComputedStyle(activeSlide);
       const slideWidth = activeSlide.offsetWidth;
       const marginLeft = parseFloat(slideStyle.marginLeft);
       const slideWidthWithMargin =
         slideWidth + marginLeft + parseFloat(slideStyle.marginRight);
+
       const targetOffsetForActiveSlide = (viewportWidth - slideWidth) / 2;
       const totalOffsetToActiveSlideEdge =
         currentSlideIndex * slideWidthWithMargin + marginLeft;
+
       let finalTransformX =
         targetOffsetForActiveSlide - totalOffsetToActiveSlideEdge;
+
       track.style.transform = `translateX(${finalTransformX}px)`;
+
       slides.forEach((slide, index) => {
         slide.classList.toggle("active", index === currentSlideIndex);
       });
+
       updateDots();
     }
 
     function createDots() {
-      /* ... (bestaande code) ... */
       if (!dotsContainer) return;
       dotsContainer.innerHTML = "";
       slides.forEach((_, index) => {
@@ -136,32 +153,37 @@ document.addEventListener("DOMContentLoaded", function () {
         dotsContainer.appendChild(dot);
       });
     }
+
     function updateDots() {
-      /* ... (bestaande code) ... */
       if (!dotsContainer) return;
       const dots = dotsContainer.children;
       Array.from(dots).forEach((dot, index) => {
         dot.classList.toggle("active", index === currentSlideIndex);
       });
     }
+
     function goToSlide(slideIndex) {
-      /* ... (bestaande code) ... */
       currentSlideIndex = (slideIndex + slides.length) % slides.length;
       updateSlidePosition();
     }
+
     function nextSlide() {
       goToSlide(currentSlideIndex + 1);
     }
+
     function prevSlide() {
       goToSlide(currentSlideIndex - 1);
     }
+
     function startAutoScroll() {
       stopAutoScroll();
       autoScrollInterval = setInterval(nextSlide, AUTOSCROLL_DELAY);
     }
+
     function stopAutoScroll() {
       clearInterval(autoScrollInterval);
     }
+
     function restartAutoScroll() {
       stopAutoScroll();
       startAutoScroll();
@@ -179,12 +201,14 @@ document.addEventListener("DOMContentLoaded", function () {
         restartAutoScroll();
       });
     }
+
     if (carouselWrapper) {
       carouselWrapper.addEventListener("mouseenter", stopAutoScroll);
       carouselWrapper.addEventListener("mouseleave", startAutoScroll);
       carouselWrapper.addEventListener("focusin", stopAutoScroll);
       carouselWrapper.addEventListener("focusout", startAutoScroll);
     }
+
     if (slides.length > 0) {
       createDots();
       requestAnimationFrame(() => {
@@ -192,6 +216,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
       startAutoScroll();
     }
+
     let resizeTimeout;
     window.addEventListener("resize", () => {
       clearTimeout(resizeTimeout);
@@ -210,19 +235,19 @@ document.addEventListener("DOMContentLoaded", function () {
   const closeModalButtons = document.querySelectorAll(".close-modal-btn");
   const closeModalInlineButtons = document.querySelectorAll(
     ".close-modal-inline-btn"
-  ); // Voor knoppen in de modal
+  );
   const modals = document.querySelectorAll(".modal");
 
   function openModal(modal) {
     if (modal == null) return;
     modal.classList.add("active");
-    document.body.style.overflow = "hidden"; // Voorkom scrollen van achtergrond
+    document.body.style.overflow = "hidden";
   }
 
   function closeModal(modal) {
     if (modal == null) return;
     modal.classList.remove("active");
-    document.body.style.overflow = "auto"; // Herstel scrollen van achtergrond
+    document.body.style.overflow = "auto";
   }
 
   openModalButtons.forEach((button) => {
@@ -248,7 +273,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   modals.forEach((modal) => {
     modal.addEventListener("click", (e) => {
-      // Sluit modal alleen als direct op de modal achtergrond (overlay) wordt geklikt
       if (e.target === modal) {
         closeModal(modal);
       }
@@ -263,20 +287,17 @@ document.addEventListener("DOMContentLoaded", function () {
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          // Haal eventuele delay op uit data-attribuut
           const delay = entry.target.dataset.animationDelay || "0s";
           entry.target.style.transitionDelay = delay;
           entry.target.classList.add("is-visible");
-          // observer.unobserve(entry.target); // Optioneel: stop observing na eerste keer
         } else {
-          // Optioneel: verwijder class als element weer uit beeld is (voor herhaalde animatie)
-          // entry.target.classList.remove("is-visible");
-          // entry.target.style.transitionDelay = '0s'; // Reset delay
+          // entry.target.classList.remove("is-visible"); // Voor herhaalde animatie
+          // entry.target.style.transitionDelay = '0s';
         }
       });
     },
     {
-      threshold: 0.1, // Percentage van element dat zichtbaar moet zijn (0.1 = 10%)
+      threshold: 0.1,
     }
   );
 

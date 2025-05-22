@@ -39,7 +39,6 @@ body {
 
 .section-padding {
     padding-top: 60px;
-    /* Meer padding voor secties */
     padding-bottom: 80px;
 }
 
@@ -66,10 +65,8 @@ h2 {
     color: var(--brand-dark);
     text-align: center;
     margin-bottom: 3rem;
-    /* Meer marge onder H2 */
     position: relative;
     padding-bottom: 0.75rem;
-    /* Meer padding voor lijn */
 }
 
 h2::after {
@@ -79,7 +76,6 @@ h2::after {
     left: 50%;
     transform: translateX(-50%);
     width: 70px;
-    /* Iets langere lijn */
     height: 3px;
     background-color: var(--accent-beige-dark);
     border-radius: 2px;
@@ -88,7 +84,6 @@ h2::after {
 h3 {
     font-size: 1.5rem;
     margin-bottom: 0.75rem;
-    /* Minder marge onder H3 in kaarten */
 }
 
 p {
@@ -107,7 +102,6 @@ img {
     height: auto;
     display: block;
     border-radius: 8px;
-    /* Standaard afronding voor afbeeldingen */
 }
 
 /* --- Navbar Stijlen --- */
@@ -117,31 +111,33 @@ img {
     left: 0;
     width: 100%;
     z-index: 1000;
-    transition: background-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 .navbar {
     height: var(--navbar-height);
     display: flex;
     align-items: center;
-    background-color: transparent;
+    background-color: rgba(252, 249, 243, 0.92);
+    /* var(--bg-main) met 92% opacity */
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+#page-header:not(.scrolled) .logo,
+#page-header:not(.scrolled) .nav-link {
+    color: var(--brand-dark);
+}
+
+#page-header:not(.scrolled) .hamburger-menu span {
+    background-color: var(--brand-dark);
+}
+
+#page-header:not(.scrolled) .nav-link:hover {
+    color: var(--accent-beige-dark);
 }
 
 #page-header.scrolled .navbar {
     background-color: var(--bg-main);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-}
-
-#page-header.scrolled .nav-link {
-    color: var(--brand-dark);
-}
-
-#page-header.scrolled .logo {
-    color: var(--brand-dark);
-}
-
-#page-header.scrolled .hamburger-menu span {
-    background-color: var(--brand-dark);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
 }
 
 .navbar-container {
@@ -171,7 +167,7 @@ img {
 .nav-link {
     font-weight: 500;
     font-size: 0.95rem;
-    transition: color 0.3s ease, transform 0.2s ease;
+    transition: color 0.3s ease;
     position: relative;
     padding-bottom: 5px;
 }
@@ -197,15 +193,6 @@ img {
     color: var(--accent-beige-dark);
     font-weight: 700;
 }
-
-#page-header:not(.scrolled) .nav-link.active-link {
-    color: var(--accent-beige-light);
-}
-
-#page-header:not(.scrolled) .nav-link:hover {
-    color: var(--accent-beige-light);
-}
-
 
 .hamburger-menu {
     display: none;
@@ -266,6 +253,60 @@ img {
     margin-left: auto;
     margin-right: auto;
 }
+
+/* --- Corrected Animation Styles --- */
+/* Initial Animation for Hero Elements (runs on page load) */
+.animate-on-load {
+    opacity: 0;
+    /* Start invisible, animation will make it visible */
+    animation-name: fadeInUp;
+    animation-duration: 0.8s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    /* Keep final state */
+}
+
+/* Apply delays using the existing delay classes */
+.animate-on-load.delay-1 {
+    animation-delay: 0.3s;
+}
+
+.animate-on-load.delay-2 {
+    animation-delay: 0.6s;
+}
+
+@keyframes fadeInUp {
+    from {
+        /* or 0% */
+        opacity: 0;
+        transform: translateY(30px);
+        /* Start position */
+    }
+
+    to {
+        /* or 100% */
+        opacity: 1;
+        transform: translateY(0);
+        /* End position */
+    }
+}
+
+/* Scroll Animations for other sections/elements (triggered by IntersectionObserver) */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(0.645, 0.045, 0.355, 1), transform 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
+    /* transition-delay is set by JS via data-animation-delay attribute */
+}
+
+.animate-on-scroll.is-visible {
+    /* Class added by JS when element is in viewport */
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Einde Corrected Animation Styles --- */
+
 
 /* Knoppen */
 .btn {
@@ -336,41 +377,32 @@ img {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2.5rem;
-    /* Meer gap */
 }
 
 .service-card {
     background-color: var(--card-bg);
     padding: 2rem;
-    /* Iets minder padding dan vorige versie, meer gebalanceerd */
     border-radius: 12px;
-    /* Rondere hoeken */
     text-align: center;
     box-shadow: 0 8px 25px rgba(176, 166, 149, 0.1);
-    /* Subtiele schaduw met accentkleur */
     transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     border: 1px solid var(--border-color);
     display: flex;
-    /* Voor betere uitlijning van content */
     flex-direction: column;
 }
 
 .service-card:hover {
     transform: translateY(-12px);
-    /* Meer lift effect */
     box-shadow: 0 15px 35px rgba(176, 166, 149, 0.18);
 }
 
 .service-icon {
     width: 80px;
-    /* Iets kleiner voor een elegantere look */
     height: 80px;
     margin: 0 auto 1.25rem auto;
     border-radius: 50%;
-    /* Cirkelvormige iconen */
     object-fit: cover;
     border: 3px solid var(--accent-beige-light);
-    /* Rand om icoon */
 }
 
 .service-card h3 {
@@ -382,12 +414,10 @@ img {
     font-size: 0.9rem;
     margin-bottom: 1.5rem;
     flex-grow: 1;
-    /* Zorgt dat p de ruimte vult */
 }
 
 .service-card .btn {
     margin-top: auto;
-    /* Knop onderaan de kaart */
 }
 
 /* Reviews Section - Slider */
@@ -652,28 +682,21 @@ footer a:hover {
 /* --- Modal Stijlen --- */
 .modal {
     display: none;
-    /* Standaard verborgen */
     position: fixed;
     z-index: 2000;
-    /* Hoger dan de navbar */
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    /* Scrollen mogelijk als content te lang is */
     background-color: rgba(60, 54, 51, 0.7);
-    /* Donkere, semi-transparante overlay */
     opacity: 0;
     transition: opacity 0.4s ease-in-out;
     padding-top: 50px;
-    /* Ruimte van boven */
 }
 
 .modal.active {
-    /* Class toegevoegd door JS om modal te tonen */
     display: flex;
-    /* Gebruik flex om content te centreren */
     align-items: center;
     justify-content: center;
     opacity: 1;
@@ -686,15 +709,12 @@ footer a:hover {
     border-radius: 12px;
     width: 90%;
     max-width: 700px;
-    /* Maximale breedte van de modal */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     position: relative;
     transform: scale(0.95);
     transition: transform 0.4s ease-in-out;
     max-height: 85vh;
-    /* Maximale hoogte */
     overflow-y: auto;
-    /* Scrollen binnen de modal content */
 }
 
 .modal.active .modal-content {
@@ -738,7 +758,6 @@ footer a:hover {
     top: 15px;
     right: 25px;
     font-size: 2.5rem;
-    /* Groter sluiticoon */
     font-weight: bold;
     line-height: 1;
 }
@@ -751,39 +770,9 @@ footer a:hover {
 }
 
 .close-modal-inline-btn {
-    /* Knop onderaan modal */
     display: block;
     margin: 1.5rem auto 0;
     width: fit-content;
-}
-
-/* --- Scroll Animaties --- */
-.animate-on-load,
-.animate-on-scroll {
-    opacity: 0;
-    transform: translateY(40px);
-    /* Start iets lager */
-    transition: opacity 0.7s cubic-bezier(0.645, 0.045, 0.355, 1), transform 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
-}
-
-.animate-on-load.delay-1 {
-    transition-delay: 0.3s;
-}
-
-.animate-on-load.delay-2 {
-    transition-delay: 0.6s;
-}
-
-.animate-on-scroll.is-visible {
-    /* Class toegevoegd door JS */
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Optionele delay voor elementen binnen een .animate-on-scroll sectie */
-.animate-on-scroll [data-animation-delay] {
-    transition-delay: var(--animation-delay, 0s) !important;
-    /* Gebruik CSS variabele voor delay */
 }
 
 
