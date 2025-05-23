@@ -1,16 +1,28 @@
 /* Basisstijlen & Variabelen */
 :root {
+    /* Vernieuwd kleurenpalet met warmere/diepere beige tinten */
     --brand-dark: #3C3633;
-    --text-light: #FDFBF7;
-    --bg-main: #FCF9F3;
-    --bg-section-light: #F7F3EC;
-    --bg-section-medium: #F0E9DD;
-    --accent-beige-light: #EADEDA;
-    --accent-beige-dark: #B0A695;
+    --text-light: #FFFFFF;
+    /* Wit voor betere leesbaarheid op foto achtergronden */
+
+    --bg-main: #F8F5F0;
+    /* Iets warmer, zacht beige voor algemene achtergrond */
+    --bg-section-light: #F0EAE0;
+    /* Lichter, warm beige voor secties */
+    --bg-section-medium: #E8E0D5;
+    /* Medium, warme beige */
+
+    --accent-beige-light: #DCD0C0;
+    /* Lichter, zacht beige accent */
+    --accent-beige-dark: #A89C8C;
+    /* Donkerder, warmer beige/taupe voor accenten */
+
     --card-bg: #FFFFFF;
-    --border-color: #E0D8CC;
+    --border-color: #D8CEC4;
+    /* Aangepaste border kleur */
     --navbar-height: 70px;
     --font-family: 'Montserrat', sans-serif;
+    --whatsapp-green: #25D366;
 }
 
 * {
@@ -38,13 +50,14 @@ body {
 }
 
 .section-padding {
-    padding-top: 60px;
+    padding-top: 80px;
     padding-bottom: 80px;
 }
 
 #hero.section-padding {
     padding-top: 0;
-    min-height: calc(85vh - var(--navbar-height));
+    /* Hero heeft eigen padding/hoogte */
+    /* min-height: calc(90vh - var(--navbar-height)); Verwijderd, hoogte wordt door content en bg bepaald */
 }
 
 
@@ -61,12 +74,12 @@ h1 {
 }
 
 h2 {
-    font-size: 2.2rem;
+    font-size: 2.3rem;
     color: var(--brand-dark);
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 3.5rem;
     position: relative;
-    padding-bottom: 0.75rem;
+    padding-bottom: 0.85rem;
 }
 
 h2::after {
@@ -75,8 +88,8 @@ h2::after {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 70px;
-    height: 3px;
+    width: 75px;
+    height: 3.5px;
     background-color: var(--accent-beige-dark);
     border-radius: 2px;
 }
@@ -90,6 +103,23 @@ p {
     margin-bottom: 1rem;
     font-size: 1rem;
     font-weight: 300;
+}
+
+.section-intro-text,
+.section-outro-text {
+    font-size: 1.05rem;
+    text-align: center;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2.5rem;
+    color: #555;
+}
+
+.section-outro-text {
+    margin-top: 2.5rem;
+    margin-bottom: 0;
+    font-size: 0.95rem;
 }
 
 a {
@@ -117,7 +147,8 @@ img {
     height: var(--navbar-height);
     display: flex;
     align-items: center;
-    background-color: rgba(252, 249, 243, 0.92);
+    background-color: rgba(248, 245, 240, 0.92);
+    /* var(--bg-main) met opacity */
     transition: background-color 0.4s ease, box-shadow 0.4s ease;
 }
 
@@ -133,6 +164,17 @@ img {
 #page-header:not(.scrolled) .nav-link:hover {
     color: var(--accent-beige-dark);
 }
+
+#page-header:not(.scrolled) .nav-link.active-link {
+    color: var(--accent-beige-dark);
+    /* Actieve link in niet-gescrollde staat */
+}
+
+#page-header:not(.scrolled) .nav-link.active-link::after {
+    background-color: var(--accent-beige-dark);
+    /* Kleur van underline */
+}
+
 
 #page-header.scrolled .navbar {
     background-color: var(--bg-main);
@@ -211,37 +253,50 @@ img {
 /* --- Einde Navbar Stijlen --- */
 
 
-/* Hero Section */
+/* Hero Section met Achtergrondafbeelding */
 .hero-section {
-    color: var(--brand-dark);
+    position: relative;
+    /* Nodig voor absolute positionering van overlay */
+    min-height: 80vh;
+    /* Zorg voor voldoende hoogte */
+    background-image: url('images/hero-background-sfeer.jpg');
+    /* Placeholder - VERVANG DEZE! */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: linear-gradient(-45deg, var(--bg-section-medium), var(--accent-beige-light), var(--bg-section-light), var(--bg-section-medium));
-    background-size: 400% 400%;
-    animation: gradientBG 25s ease infinite;
-    overflow: hidden;
+    color: var(--text-light);
+    /* Lichte tekst voor op donkere afbeelding */
 }
 
-@keyframes gradientBG {
-    0% {
-        background-position: 0% 50%;
-    }
+.hero-overlay {
+    /* Overlay voor betere tekstleesbaarheid */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(60, 54, 51, 0.45);
+    /* Donkere overlay met transparantie */
+    z-index: 1;
+}
 
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
+.hero-content {
+    /* Content komt boven de overlay */
+    position: relative;
+    z-index: 2;
 }
 
 .hero-section h1 {
     font-size: 3.2rem;
     margin-bottom: 1.5rem;
     font-weight: 700;
+    color: var(--text-light);
+    /* Override standaard H1 kleur */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .hero-section p {
@@ -251,7 +306,23 @@ img {
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
+    color: var(--text-light);
+    /* Override standaard P kleur */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
+
+.hero-section .btn-primary {
+    /* Aanpassing voor hero knop indien nodig */
+    background-color: var(--accent-beige-light);
+    color: var(--brand-dark);
+    border-color: var(--accent-beige-light);
+}
+
+.hero-section .btn-primary:hover {
+    background-color: var(--text-light);
+    border-color: var(--text-light);
+}
+
 
 /* Knoppen */
 .btn {
@@ -296,28 +367,59 @@ img {
     background-color: var(--bg-section-light);
 }
 
-/* Over Mij Sectie */
-#over-mij .flex-container {
-    display: flex;
-    align-items: center;
-    gap: 3rem;
+/* Over Mij Sectie - Aangepast voor foto stack */
+#over-mij .flex-container.over-mij-flex-container {
+    align-items: flex-start;
+    /* Boven uitlijnen */
+    gap: 2.5rem;
 }
 
 #over-mij .text-content {
+    flex: 1.5;
+    /* Meer ruimte voor tekst */
+}
+
+#over-mij .text-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--brand-dark);
+}
+
+#over-mij .image-content-stack {
     flex: 1;
+    position: relative;
+    min-height: 480px;
+    /* Zorg voor voldoende hoogte voor positionering */
 }
 
-#over-mij .image-content {
-    flex: 0 0 350px;
-    text-align: center;
-}
-
-#over-mij .image-content img {
+#over-mij .over-mij-hoofdfoto {
+    width: 85%;
+    /* Iets kleiner dan container */
+    max-width: 380px;
     border-radius: 10px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    display: block;
+    margin-left: auto;
+    /* Rechts uitlijnen */
+    margin-right: 0;
 }
 
-/* Werkwijze Sectie & Service Kaarten - Verbeterde Hover */
+#over-mij .over-mij-sfeerfoto {
+    width: 60%;
+    max-width: 250px;
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    position: absolute;
+    bottom: -20px;
+    /* Overlap */
+    left: -30px;
+    /* Overlap */
+    border: 4px solid var(--bg-main);
+    /* Rand om sfeerfoto */
+}
+
+
+/* Werkwijze Sectie & Service Kaarten */
 .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -329,8 +431,8 @@ img {
     padding: 2rem;
     border-radius: 12px;
     text-align: center;
-    box-shadow: 0 8px 25px rgba(176, 166, 149, 0.1);
-    /* Soepelere transitie voor hover */
+    box-shadow: 0 8px 25px rgba(168, 156, 140, 0.12);
+    /* Aangepaste schaduw met nieuwe accentkleur */
     transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     border: 1px solid var(--border-color);
     display: flex;
@@ -339,23 +441,28 @@ img {
 
 .service-card:hover {
     transform: translateY(-15px);
-    /* Iets meer lift */
-    box-shadow: 0 20px 40px rgba(176, 166, 149, 0.22);
-    /* Zachtere, meer verspreide schaduw */
+    box-shadow: 0 20px 40px rgba(168, 156, 140, 0.25);
 }
 
 .service-icon {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 1.25rem auto;
-    border-radius: 50%;
+    /* Nu voor foto's, niet alleen iconen */
+    width: 100%;
+    /* Volledige breedte van de kaart */
+    height: 200px;
+    /* Vaste hoogte voor consistentie */
+    margin: -2rem -2rem 1.5rem -2rem;
+    /* Negatieve marge om tot rand te laten lopen, padding van kaart compenseert */
+    border-radius: 12px 12px 0 0;
+    /* Alleen bovenste hoeken afronden */
     object-fit: cover;
-    border: 3px solid var(--accent-beige-light);
+    border: none;
+    /* Geen extra rand nodig als het een foto is */
 }
 
 .service-card h3 {
     margin-bottom: 0.75rem;
     font-size: 1.3rem;
+    padding-top: 0.5rem;
 }
 
 .service-card p {
@@ -367,6 +474,93 @@ img {
 .service-card .btn {
     margin-top: auto;
 }
+
+/* Tarieven Sectie */
+.tarieven-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.tarief-card {
+    background-color: var(--card-bg);
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 25px rgba(168, 156, 140, 0.08);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.tarief-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 18px 35px rgba(168, 156, 140, 0.18);
+}
+
+.tarief-card-highlighted {
+    border: 2px solid var(--accent-beige-dark);
+    box-shadow: 0 10px 30px rgba(168, 156, 140, 0.15);
+}
+
+.tarief-card-highlighted:hover {
+    box-shadow: 0 20px 45px rgba(168, 156, 140, 0.25);
+}
+
+.tarief-icon {
+    font-size: 2.5rem;
+    color: var(--accent-beige-dark);
+    margin-bottom: 1rem;
+}
+
+.tarief-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.tarief-prijs {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--brand-dark);
+    margin-bottom: 1rem;
+}
+
+.tarief-card p {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.tarief-features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    text-align: left;
+    flex-grow: 1;
+}
+
+.tarief-features li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5em;
+    position: relative;
+}
+
+.tarief-features li::before {
+    content: '\f00c';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    color: var(--accent-beige-dark);
+    position: absolute;
+    left: 0;
+}
+
+.tarief-card .btn {
+    margin-top: auto;
+}
+
 
 /* Reviews Section - Slider */
 .testimonial-section-container {
@@ -487,63 +681,40 @@ img {
     transform: scale(1.3);
 }
 
-/* Blog Section - Verbeterde Hover */
-.blog-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+/* Contact Sectie - Aangepast voor foto */
+.contact-container-flex {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+    /* Boven uitlijnen */
 }
 
-.blog-post-preview {
-    background-color: var(--card-bg);
+.contact-text-content {
+    flex: 1.2;
+    /* Meer ruimte voor formulier */
+}
+
+.contact-image-content {
+    flex: 0.8;
+    max-width: 350px;
+    /* Max breedte voor afbeelding */
+    margin-top: 1rem;
+    /* Iets lager dan de titel */
+}
+
+.contact-image-content img {
     border-radius: 10px;
-    box-shadow: 0 8px 25px rgba(176, 166, 149, 0.08);
-    /* Subtielere initiële schaduw */
-    overflow: hidden;
-    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 25px rgba(168, 156, 140, 0.15);
 }
 
-.blog-post-preview:hover {
-    transform: translateY(-10px);
-    /* Iets minder lift dan service cards */
-    box-shadow: 0 15px 30px rgba(176, 166, 149, 0.16);
-}
-
-.blog-post-preview img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.blog-post-preview:hover img {
-    transform: scale(1.03);
-    /* Subtiele zoom op afbeelding bij hover */
-}
-
-.blog-post-preview h3 {
-    padding: 1.25rem 1.5rem 0.5rem 1.5rem;
-}
-
-.blog-post-preview p {
-    padding: 0 1.5rem 1.25rem 1.5rem;
-    font-size: 0.9rem;
-}
-
-.blog-post-preview .btn {
-    margin: 0 1.5rem 1.5rem 1.5rem;
-}
-
-/* Contact Section */
 .contact-form {
-    max-width: 600px;
-    margin: 2rem auto;
-    padding: 2.5rem;
-    background-color: var(--card-bg);
-    border-radius: 10px;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.07);
-    border: 1px solid var(--border-color);
+    max-width: 100%;
+    /* Formulier neemt nu breedte van container */
+    margin: 1rem 0;
+    padding: 0;
+    box-shadow: none;
+    border: none;
+    background-color: transparent;
 }
 
 .form-group {
@@ -563,28 +734,32 @@ img {
     border: 1px solid var(--border-color);
     border-radius: 8px;
     font-family: var(--font-family);
-    background-color: var(--bg-main);
+    background-color: var(--card-bg);
+    /* Wit voor input velden */
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
     border-color: var(--accent-beige-dark);
-    box-shadow: 0 0 0 3px rgba(176, 166, 149, 0.25);
+    box-shadow: 0 0 0 3px rgba(168, 156, 140, 0.3);
 }
 
 .contact-form button[type="submit"] {
     display: block;
-    width: 100%;
+    width: auto;
+    /* Niet volledige breedte */
+    padding: 0.9rem 2.5rem;
+    margin-top: 1rem;
 }
 
 .contact-details {
-    text-align: center;
-    margin-top: 2.5rem;
+    text-align: left;
+    margin-top: 1.5rem;
 }
 
 .contact-details p {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
 }
 
 .contact-details a {
@@ -771,8 +946,28 @@ footer a:hover {
     transform: translateY(0);
 }
 
-.animate-on-scroll [data-animation-delay] {
-    transition-delay: var(--animation-delay, 0s) !important;
+/* --- Vaste WhatsApp Knop --- */
+.whatsapp-fab {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: var(--whatsapp-green);
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.3s ease;
+}
+
+.whatsapp-fab:hover {
+    transform: scale(1.1) rotate(5deg);
+    background-color: #128C7E;
 }
 
 
@@ -789,6 +984,35 @@ footer a:hover {
 
     .nav-links li {
         margin-left: 1.5rem;
+    }
+
+    .tarieven-grid {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    #over-mij .image-content-stack {
+        min-height: auto;
+        margin-top: 2rem;
+    }
+
+    /* Aanpassing voor stack op tablet */
+    #over-mij .over-mij-hoofdfoto {
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    #over-mij .over-mij-sfeerfoto {
+        display: none;
+    }
+
+    /* Verberg kleinere sfeerfoto op tablet voor eenvoud */
+    .contact-container-flex {
+        flex-direction: column;
+    }
+
+    .contact-image-content {
+        max-width: 100%;
+        margin-top: 2rem;
     }
 }
 
@@ -864,13 +1088,21 @@ footer a:hover {
         transform: translateY(-8px) rotate(-45deg);
     }
 
-    #over-mij .flex-container {
-        flex-direction: column;
+    #over-mij .flex-container.over-mij-flex-container {
+        flex-direction: column-reverse;
     }
 
-    #over-mij .image-content {
-        margin-top: 2rem;
+    /* Foto bovenaan op mobiel */
+    #over-mij .image-content-stack {
+        margin-top: 0;
+        margin-bottom: 2rem;
+    }
+
+    #over-mij .over-mij-hoofdfoto {
+        width: 80%;
         max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .testimonial-slide {
@@ -910,21 +1142,30 @@ footer a:hover {
         font-size: 1.5rem;
     }
 
-    /* "Highlight" effect voor kaarten op mobiel wanneer ze in beeld zijn */
     .service-card.is-visible,
-    .blog-post-preview.is-visible {
-        box-shadow: 0 12px 30px rgba(176, 166, 149, 0.15);
-        /* Iets prominentere schaduw */
-        /* transform: scale(1.02); /* Optioneel: lichte schaalvergroting */
+    .tarief-card.is-visible {
+        box-shadow: 0 12px 30px rgba(168, 156, 140, 0.15);
     }
 
     .service-card:hover,
-    /* Behoud desktop hover, maar overschrijf niet de .is-visible als die specifieker is */
-    .blog-post-preview:hover {
-        transform: translateY(-5px);
-        /* Minder lift op mobiel, of verwijder als .is-visible voldoende is */
-        box-shadow: 0 15px 30px rgba(176, 166, 149, 0.16);
+    .tarief-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px rgba(168, 156, 140, 0.16);
     }
+
+    .whatsapp-fab {
+        width: 55px;
+        height: 55px;
+        font-size: 1.8rem;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .contact-image-content {
+        display: none;
+    }
+
+    /* Verberg contact afbeelding op kleinere mobiele schermen */
 }
 
 @media (max-width: 480px) {
@@ -973,5 +1214,17 @@ footer a:hover {
     .modal-content p,
     .modal-content ul {
         font-size: 0.9rem;
+    }
+
+    .tarieven-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .whatsapp-fab {
+        width: 50px;
+        height: 50px;
+        font-size: 1.6rem;
+        bottom: 15px;
+        right: 15px;
     }
 }

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stefanie Bergshoeff - Kracht & Balans (Modern V5.1)</title>
+    <title>Stefanie Bergshoeff - Kracht & Balans (Modern V8)</title>
     <link rel="stylesheet" href="style.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
@@ -24,7 +24,7 @@
             <li><a href="#over-mij" class="nav-link">Over Mij</a></li>
             <li><a href="#werkwijze" class="nav-link">Werkwijze</a></li>
             <li><a href="#reviews" class="nav-link">Reviews</a></li>
-            <li><a href="#blog" class="nav-link">Blog</a></li>
+            <li><a href="#tarieven" class="nav-link">Tarieven</a></li>
             <li><a href="#contact" class="nav-link">Contact</a></li>
           </ul>
           <div class="hamburger-menu">
@@ -38,11 +38,12 @@
 
     <main>
       <section id="hero" class="hero-section section-padding">
-        <div class="container">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
           <h1 class="animate-on-load">Vind Jouw Innerlijke Kracht & Balans</h1>
           <p class="animate-on-load delay-1">
-            Coaching en energetische therapie voor een leven vol energie en
-            harmonie.
+            Lifestyle coaching en energetische therapie voor een leven vol
+            energie en harmonie.
           </p>
           <a href="#contact" class="btn btn-primary animate-on-load delay-2"
             >Neem Contact Op</a
@@ -56,26 +57,37 @@
       >
         <div class="container">
           <h2>Over Mij</h2>
-          <div class="flex-container">
+          <div class="flex-container over-mij-flex-container">
             <div class="text-content">
+              <h3>Welkom, ik ben Stefanie</h3>
               <p>
-                Mijn naam is Stefanie Bergshoeff. Met een passie voor
-                persoonlijke groei en welzijn, help ik je graag om belemmeringen
-                te overwinnen en je volledige potentieel te bereiken. Ik ben een
-                ervaren coach en therapeut, gespecialiseerd in het herstellen
-                van de balans tussen lichaam en geest.
+                Met een diepe passie voor persoonlijke groei en authentiek
+                welzijn, begeleid ik je met warmte en expertise op jouw pad naar
+                een vervullender leven. Als ervaren lifestyle coach en
+                therapeut, focus ik op het herstellen van de harmonie tussen
+                lichaam, geest en ziel.
               </p>
               <p>
-                Mijn aanpak is persoonlijk, empathisch en gericht op duurzame
-                verandering. Samen ontdekken we jouw unieke pad naar een leven
-                vol kracht en sereniteit.
+                Mijn aanpak is holistisch, persoonlijk en altijd gericht op
+                duurzame, positieve verandering. Ik geloof sterk in jouw
+                innerlijke kracht en help je deze te (her)ontdekken en in te
+                zetten. Samen creëren we een leven dat niet alleen goed voelt,
+                maar ook echt bij jou past.
               </p>
+              <a href="#contact" class="btn btn-secondary">Start jouw reis</a>
             </div>
-            <div class="image-content">
+            <div class="image-content-stack">
               <img
-                src="images/IMG_7947-scaled.jpeg"
-                alt="Stefanie Bergshoeff"
-                onerror="this.onerror=null;this.src='https://placehold.co/350x350/F0E9DD/3C3633?text=Stefanie+Bergshoeff';"
+                src="images/stefanie-portret-warm.jpg"
+                alt="Portretfoto van Stefanie Bergshoeff, lifestyle coach"
+                class="over-mij-hoofdfoto"
+                onerror="this.onerror=null;this.src='https://placehold.co/380x480/E4DCD3/3C3633?text=Stefanie+Bergshoeff';"
+              />
+              <img
+                src="images/praktijk-sfeer-detail.jpg"
+                alt="Sfeerbeeld van de praktijkruimte of een inspirerend detail"
+                class="over-mij-sfeerfoto"
+                onerror="this.onerror=null;this.src='https://placehold.co/250x200/F5F0E8/3C3633?text=Sfeerbeeld+Praktijk';"
               />
             </div>
           </div>
@@ -91,16 +103,16 @@
           <div class="services-grid">
             <div class="service-card animate-on-scroll">
               <img
-                src="images/werkwijze-intake.jpg"
-                alt="Intake en doelstelling coaching"
+                src="images/werkwijze-intake-foto.jpg"
+                alt="Visualisatie van een intakegesprek coaching"
                 class="service-icon"
-                onerror="this.onerror=null;this.src='https://placehold.co/100x100/EADEDA/3C3633?text=Intake';"
+                onerror="this.onerror=null;this.src='https://placehold.co/280x200/EADEDA/3C3633?text=Intake+%26+Doelen';"
               />
               <h3>Intake & Doelstelling</h3>
               <p>
                 We starten met een vrijblijvend kennismakingsgesprek. Hierin
                 bespreken we jouw huidige situatie, uitdagingen en waar je
-                naartoe wilt groeien.
+                naartoe wilt groeien in jouw lifestyle.
               </p>
               <button
                 class="btn btn-secondary open-modal-btn"
@@ -114,16 +126,16 @@
               data-animation-delay="0.2s"
             >
               <img
-                src="images/werkwijze-traject.jpg"
-                alt="Coaching traject en actieplan"
+                src="images/werkwijze-traject-foto.jpg"
+                alt="Visualisatie van een coaching traject en actieplan"
                 class="service-icon"
-                onerror="this.onerror=null;this.src='https://placehold.co/100x100/EADEDA/3C3633?text=Traject';"
+                onerror="this.onerror=null;this.src='https://placehold.co/280x200/EADEDA/3C3633?text=Traject+%26+Actie';"
               />
               <h3>Traject & Actieplan</h3>
               <p>
                 Samen stellen we een persoonlijk coachingstraject op met
-                concrete, haalbare doelen en een duidelijk actieplan om deze te
-                bereiken.
+                concrete, haalbare doelen en een duidelijk actieplan om jouw
+                gewenste lifestyle te bereiken.
               </p>
               <button
                 class="btn btn-secondary open-modal-btn"
@@ -137,16 +149,16 @@
               data-animation-delay="0.4s"
             >
               <img
-                src="images/werkwijze-reflectie.jpg"
-                alt="Reflectie en integratie coaching"
+                src="images/werkwijze-reflectie-foto.jpg"
+                alt="Visualisatie van reflectie en integratie in coaching"
                 class="service-icon"
-                onerror="this.onerror=null;this.src='https://placehold.co/100x100/EADEDA/3C3633?text=Reflectie';"
+                onerror="this.onerror=null;this.src='https://placehold.co/280x200/EADEDA/3C3633?text=Reflectie+%26+Integratie';"
               />
               <h3>Reflectie & Integratie</h3>
               <p>
                 Gedurende het traject reflecteren we regelmatig op je voortgang.
                 We vieren successen en zorgen voor duurzame integratie van
-                nieuwe inzichten.
+                nieuwe, gezonde gewoontes.
               </p>
               <button
                 class="btn btn-secondary open-modal-btn"
@@ -167,7 +179,7 @@
             src="images/werkwijze-intake-detail.jpg"
             alt="[Gedetailleerd beeld van een intakegesprek]"
             class="modal-image"
-            onerror="this.onerror=null;this.src='https://placehold.co/600x300/F0E9DD/3C3633?text=Intake+Details';"
+            onerror="this.onerror=null;this.src='https://placehold.co/600x300/E4DCD3/3C3633?text=Intake+Details';"
           />
           <p>
             De eerste stap in ons coachingstraject is een uitgebreid en
@@ -177,20 +189,21 @@
           </p>
           <ul>
             <li>
-              <strong>Jouw huidige situatie:</strong> Waar loop je tegenaan? Wat
-              zijn je huidige patronen en overtuigingen?
+              <strong>Jouw huidige lifestyle:</strong> Waar loop je tegenaan?
+              Wat zijn je huidige patronen en overtuigingen die je belemmeren?
             </li>
             <li>
-              <strong>Jouw wensen en verlangens:</strong> Waar droom je van? Wat
-              zou je willen bereiken op persoonlijk en/of professioneel vlak?
+              <strong>Jouw wensen en verlangens:</strong> Waar droom je van voor
+              jouw ideale leven? Wat zou je willen bereiken op het gebied van
+              gezondheid, energie, balans en voldoening?
             </li>
             <li>
               <strong>Jouw energiegevers en -nemers:</strong> Wat geeft je
-              kracht en wat kost je juist energie?
+              kracht en wat kost je juist energie in je dagelijks leven?
             </li>
             <li>
-              <strong>Eerdere ervaringen:</strong> Wat heb je al geprobeerd en
-              wat werkte wel of niet voor jou?
+              <strong>Eerdere ervaringen:</strong> Wat heb je al geprobeerd om
+              je lifestyle te verbeteren en wat werkte wel of niet voor jou?
             </li>
           </ul>
           <p>
@@ -211,50 +224,56 @@
       <div id="modal-traject" class="modal">
         <div class="modal-content">
           <span class="close-modal-btn">&times;</span>
-          <h3>Traject & Actieplan: Jouw Pad naar Groei</h3>
+          <h3>Traject & Actieplan: Jouw Pad naar een Vitale Lifestyle</h3>
           <img
             src="images/werkwijze-traject-detail.jpg"
             alt="[Gedetailleerd beeld van een actieplan]"
             class="modal-image"
-            onerror="this.onerror=null;this.src='https://placehold.co/600x300/F0E9DD/3C3633?text=Traject+Details';"
+            onerror="this.onerror=null;this.src='https://placehold.co/600x300/E4DCD3/3C3633?text=Traject+Details';"
           />
           <p>
             Nadat we je doelen helder hebben, ontwerpen we een persoonlijk
             coachingstraject. Dit traject is volledig afgestemd op jouw
             behoeften, tempo en leerstijl. We maken een concreet actieplan met
-            duidelijke stappen die je gaat zetten. Tijdens de coachingsessies
+            duidelijke stappen die je gaat zetten om jouw gewenste
+            lifestyleveranderingen te realiseren. Tijdens de coachingsessies
             werken we aan:
           </p>
           <ul>
             <li>
               <strong>Bewustwording:</strong> Inzicht krijgen in je eigen
-              gedrag, gedachten, gevoelens en overtuigingen.
+              gedrag, gedachten, gevoelens en overtuigingen die je huidige
+              lifestyle beïnvloeden.
             </li>
             <li>
               <strong>Belemmeringen aanpakken:</strong> Obstakels identificeren
-              en strategieën ontwikkelen om deze te overwinnen.
+              (zoals stress, tijdgebrek, negatieve self-talk) en strategieën
+              ontwikkelen om deze te overwinnen.
             </li>
             <li>
-              <strong>Nieuwe vaardigheden ontwikkelen:</strong> Leren van nieuwe
-              tools en technieken die je helpen je doelen te bereiken (bijv.
-              timemanagement, communicatievaardigheden, grenzen stellen).
+              <strong>Nieuwe, gezonde gewoontes ontwikkelen:</strong> Leren van
+              nieuwe tools en technieken die je helpen je doelen te bereiken
+              (bijv. gezonde voeding, effectieve beweging, stressmanagement,
+              slaaphygiëne, timemanagement, grenzen stellen).
             </li>
             <li>
               <strong>Krachtbronnen aanboren:</strong> Ontdekken en benutten van
-              jouw innerlijke kracht en talenten.
+              jouw innerlijke kracht, motivatie en talenten om positieve
+              veranderingen door te voeren.
             </li>
             <li>
               <strong>Concrete actie:</strong> Tussen de sessies door ga je aan
-              de slag met opdrachten en oefeningen die passen bij jouw proces.
+              de slag met praktische opdrachten en oefeningen die passen bij
+              jouw proces en je helpen nieuwe gewoontes te implementeren.
             </li>
           </ul>
           <p>
             Ik maak gebruik van diverse coachingmethodieken en -technieken,
             afgestemd op wat jij op dat moment nodig hebt. Denk hierbij aan
-            oplossingsgericht coachen, NLP (Neuro Linguïstisch Programmeren),
-            systemisch werk, mindfulness en energetische oefeningen. Regelmatige
-            evaluatie zorgt ervoor dat we op koers blijven en het traject
-            eventueel bijstellen waar nodig.
+            oplossingsgericht coachen, positieve psychologie, NLP (Neuro
+            Linguïstisch Programmeren), systemisch werk, mindfulness en
+            energetische oefeningen. Regelmatige evaluatie zorgt ervoor dat we
+            op koers blijven en het traject eventueel bijstellen waar nodig.
           </p>
           <button class="btn btn-primary close-modal-inline-btn">
             Sluiten
@@ -265,27 +284,28 @@
       <div id="modal-reflectie" class="modal">
         <div class="modal-content">
           <span class="close-modal-btn">&times;</span>
-          <h3>Reflectie & Integratie: Verankering van Succes</h3>
+          <h3>Reflectie & Integratie: Verankering van Jouw Nieuwe Lifestyle</h3>
           <img
             src="images/werkwijze-reflectie-detail.jpg"
             alt="[Gedetailleerd beeld van reflectie]"
             class="modal-image"
-            onerror="this.onerror=null;this.src='https://placehold.co/600x300/F0E9DD/3C3633?text=Reflectie+Details';"
+            onerror="this.onerror=null;this.src='https://placehold.co/600x300/E4DCD3/3C3633?text=Reflectie+Details';"
           />
           <p>
             Reflectie is een cruciaal onderdeel van het coachingproces.
             Gedurende het hele traject, en zeker aan het einde, staan we stil
-            bij jouw ontwikkeling en de stappen die je hebt gezet. We kijken
-            naar:
+            bij jouw ontwikkeling en de stappen die je hebt gezet naar een
+            gezondere en meer gebalanceerde lifestyle. We kijken naar:
           </p>
           <ul>
             <li>
               <strong>Behaalde resultaten:</strong> Welke doelen heb je bereikt?
-              Welke veranderingen heb je doorgemaakt?
+              Welke positieve veranderingen heb je doorgemaakt in je dagelijks
+              leven, energieniveau en welzijn?
             </li>
             <li>
               <strong>Geleerde lessen:</strong> Welke nieuwe inzichten heb je
-              opgedaan over jezelf en je omgeving?
+              opgedaan over jezelf, je lichaam, je gewoontes en je omgeving?
             </li>
             <li>
               <strong>Successen vieren:</strong> Het erkennen en vieren van je
@@ -294,22 +314,25 @@
             </li>
             <li>
               <strong>Uitdagingen en hoe je daarmee omging:</strong> Hoe heb je
-              obstakels overwonnen en wat heb je daarvan geleerd?
+              obstakels overwonnen en wat heb je daarvan geleerd voor de
+              toekomst?
             </li>
           </ul>
           <p>
             Het doel is niet alleen om je doelen te bereiken, maar ook om de
-            nieuwe inzichten, vaardigheden en gedragspatronen duurzaam te
+            nieuwe inzichten, vaardigheden en gezonde gewoontes duurzaam te
             integreren in je dagelijks leven. We bespreken hoe je zelfstandig
             verder kunt en hoe je eventuele toekomstige uitdagingen het hoofd
-            kunt bieden. Soms plannen we na enige tijd een opvolgsessie om de
-            voortgang te bespreken en de verankering te ondersteunen.
+            kunt bieden om terugval te voorkomen. Soms plannen we na enige tijd
+            een opvolgsessie om de voortgang te bespreken en de verankering te
+            ondersteunen.
           </p>
           <button class="btn btn-primary close-modal-inline-btn">
             Sluiten
           </button>
         </div>
       </div>
+
       <section
         id="reviews"
         class="content-section bg-section-light section-padding animate-on-scroll"
@@ -323,8 +346,8 @@
                   <div class="testimonial-content">
                     <p>
                       "Dankzij Stefanie heb ik grote stappen kunnen zetten in
-                      mijn persoonlijke ontwikkeling. Haar aanpak is warm en
-                      effectief."
+                      mijn persoonlijke ontwikkeling en lifestyle. Haar aanpak
+                      is warm en effectief."
                     </p>
                     <h4>- Anna V.</h4>
                   </div>
@@ -332,8 +355,9 @@
                 <div class="testimonial-slide">
                   <div class="testimonial-content">
                     <p>
-                      "De Reiki behandelingen hebben mij enorm geholpen om rust
-                      te vinden in een stressvolle periode. Een aanrader!"
+                      "De coaching heeft mij enorm geholpen om rust en balans te
+                      vinden in een stressvolle periode. Ik heb nu veel meer
+                      energie! Een aanrader!"
                     </p>
                     <h4>- Mark S.</h4>
                   </div>
@@ -342,7 +366,7 @@
                   <div class="testimonial-content">
                     <p>
                       "Ik voel me energieker en meer in balans sinds ik bij
-                      Stefanie kom. Zeer professioneel en prettig."
+                      Stefanie kom. Zeer professioneel en prettig in de omgang."
                     </p>
                     <h4>- Linda K.</h4>
                   </div>
@@ -350,8 +374,9 @@
                 <div class="testimonial-slide">
                   <div class="testimonial-content">
                     <p>
-                      "Een hele fijne en integere coach. Stefanie luistert echt
-                      en helpt je verder op je pad. Ik kom zeker terug!"
+                      "Een hele fijne en integere lifestyle coach. Stefanie
+                      luistert echt en helpt je verder op je pad naar een
+                      gezonder leven. Ik kom zeker terug!"
                     </p>
                     <h4>- Jeroen P.</h4>
                   </div>
@@ -370,58 +395,75 @@
       </section>
 
       <section
-        id="blog"
+        id="tarieven"
         class="content-section section-padding animate-on-scroll"
       >
         <div class="container">
-          <h2>Laatste Blogartikelen</h2>
-          <div class="blog-grid">
-            <article class="blog-post-preview animate-on-scroll">
-              <img
-                src="images/istockphoto-1319764741-612x612.jpg"
-                alt="[Afbeelding van een persoon die ontspant in de natuur voor blog over energie]"
-                onerror="this.onerror=null;this.src='https://placehold.co/400x250/F0E9DD/3C3633?text=Blog+1';"
-              />
-              <h3>Tips voor meer energie in je dagelijks leven</h3>
+          <h2>Tarieven & Pakketten</h2>
+          <p class="section-intro-text">
+            Investeer in jezelf en ontdek de mogelijkheden. Ik bied
+            verschillende opties aan die passen bij jouw behoeften en doelen op
+            weg naar een vitaler leven.
+          </p>
+          <div class="tarieven-grid">
+            <div class="tarief-card animate-on-scroll">
+              <i class="fas fa-coffee tarief-icon"></i>
+              <h3>Kennismakingsgesprek</h3>
+              <p class="tarief-prijs">Gratis</p>
               <p>
-                Ontdek eenvoudige manieren om je vitaliteit te verhogen en
-                vermoeidheid tegen te gaan...
+                Een vrijblijvend gesprek van 30 minuten om te kijken of we een
+                klik hebben en wat ik voor je kan betekenen.
               </p>
-              <a href="#" class="btn btn-secondary">Lees meer</a>
-            </article>
-            <article
-              class="blog-post-preview animate-on-scroll"
+              <ul class="tarief-features">
+                <li>30 minuten</li>
+                <li>Online of telefonisch</li>
+                <li>Jouw vragen beantwoord</li>
+              </ul>
+              <a href="#contact" class="btn btn-secondary">Plan gesprek</a>
+            </div>
+            <div
+              class="tarief-card animate-on-scroll"
               data-animation-delay="0.2s"
             >
-              <img
-                src="images/f0178335-800px-wm.jpg"
-                alt="[Afbeelding van een hartvormig object of een persoon die mediteert voor blog over zelfcompassie]"
-                onerror="this.onerror=null;this.src='https://placehold.co/400x250/F0E9DD/3C3633?text=Blog+2';"
-              />
-              <h3>De kracht van zelfcompassie</h3>
+              <i class="fas fa-comments tarief-icon"></i>
+              <h3>Losse Coaching Sessie</h3>
+              <p class="tarief-prijs">€ 85,-</p>
               <p>
-                Leer hoe je milder voor jezelf kunt zijn en waarom dit
-                essentieel is voor je welzijn...
+                Een krachtige sessie van 60-75 minuten gericht op een specifieke
+                vraag of uitdaging.
               </p>
-              <a href="#" class="btn btn-secondary">Lees meer</a>
-            </article>
-            <article
-              class="blog-post-preview animate-on-scroll"
+              <ul class="tarief-features">
+                <li>60-75 minuten</li>
+                <li>Diepgaande coaching</li>
+                <li>Directe inzichten & tools</li>
+              </ul>
+              <a href="#contact" class="btn btn-secondary">Boek sessie</a>
+            </div>
+            <div
+              class="tarief-card tarief-card-highlighted animate-on-scroll"
               data-animation-delay="0.4s"
             >
-              <img
-                src="images/Lachen-op-de-werkvloer-is-gezond-de-7-redenen-waarom-Paola-Pisu.webp"
-                alt="[Afbeelding van een weegschaal of een persoon die werk en prive balanceert]"
-                onerror="this.onerror=null;this.src='https://placehold.co/400x250/F0E9DD/3C3633?text=Blog+3';"
-              />
-              <h3>Balans vinden: werk en privé</h3>
+              <i class="fas fa-seedling tarief-icon"></i>
+              <h3>Lifestyle Traject "Groei"</h3>
+              <p class="tarief-prijs">€ 395,-</p>
               <p>
-                Praktische adviezen voor een gezonde balans tussen je
-                professionele en persoonlijke leven...
+                Een compleet traject van 5 sessies om duurzame verandering in
+                jouw lifestyle te realiseren.
               </p>
-              <a href="#" class="btn btn-secondary">Lees meer</a>
-            </article>
+              <ul class="tarief-features">
+                <li>5 sessies (60-75 min p.s.)</li>
+                <li>Persoonlijk actieplan</li>
+                <li>Tussentijdse support via mail</li>
+                <li>Bonus: Werkboek "Jouw Kracht"</li>
+              </ul>
+              <a href="#contact" class="btn btn-primary">Start jouw traject</a>
+            </div>
           </div>
+          <p class="section-outro-text">
+            Alle prijzen zijn inclusief BTW. Betaling in termijnen is mogelijk
+            in overleg. Neem contact op voor een op maat gemaakt aanbod als je
+            specifieke wensen hebt.
+          </p>
         </div>
       </section>
 
@@ -429,43 +471,54 @@
         id="contact"
         class="content-section bg-section-light section-padding animate-on-scroll"
       >
-        <div class="container">
-          <h2>Neem Contact Op</h2>
-          <p>
-            Heb je een vraag of wil je een afspraak maken? Vul het formulier in
-            of neem direct contact op.
-          </p>
-          <form class="contact-form">
-            <div class="form-group">
-              <label for="name">Naam:</label>
-              <input type="text" id="name" name="name" required />
-            </div>
-            <div class="form-group">
-              <label for="email">Email:</label>
-              <input type="email" id="email" name="email" required />
-            </div>
-            <div class="form-group">
-              <label for="message">Bericht:</label>
-              <textarea
-                id="message"
-                name="message"
-                rows="5"
-                required
-              ></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Verstuur</button>
-          </form>
-          <div class="contact-details">
-            <p>
-              Of mail naar:
-              <a href="mailto:info@stefaniebergshoeff.nl"
-                >info@stefaniebergshoeff.nl</a
-              >
+        <div class="container contact-container-flex">
+          <div class="contact-text-content">
+            <h2>Klaar voor Verandering? Neem Contact Op!</h2>
+            <p
+              class="section-intro-text"
+              style="text-align: left; margin-left: 0"
+            >
+              Zet vandaag nog de eerste stap naar een leven vol energie, balans
+              en voldoening. Ik help je graag verder. Vul het formulier in, of
+              stuur me direct een berichtje.
             </p>
-            <p>
-              Telefoon:
-              <a href="tel:+31612345678">+31 6 123 456 78</a> (voorbeeld)
-            </p>
+            <form class="contact-form">
+              <div class="form-group">
+                <label for="name">Naam:</label>
+                <input type="text" id="name" name="name" required />
+              </div>
+              <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required />
+              </div>
+              <div class="form-group">
+                <label for="message"
+                  >Bericht (optioneel: waar wil je aan werken?):</label
+                >
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Verstuur</button>
+            </form>
+            <div class="contact-details">
+              <p>
+                Of mail direct naar:
+                <a href="mailto:info@stefaniebergshoeff.nl"
+                  >info@stefaniebergshoeff.nl</a
+                >
+              </p>
+            </div>
+          </div>
+          <div class="contact-image-content">
+            <img
+              src="images/contact-sfeer-stefanie.jpg"
+              alt="Stefanie Bergshoeff in een rustgevende omgeving"
+              onerror="this.onerror=null;this.src='https://placehold.co/400x500/E4DCD3/3C3633?text=Contact+Sfeer';"
+            />
           </div>
         </div>
       </section>
@@ -474,8 +527,8 @@
     <footer>
       <div class="container">
         <p>
-          &copy; <span id="currentYear"></span> Stefanie Bergshoeff - Kracht &
-          Balans. Alle rechten voorbehouden.
+          &copy; <span id="currentYear"></span> Stefanie Bergshoeff - Lifestyle
+          Coaching & Energetische Therapie. Alle rechten voorbehouden.
         </p>
         <div class="social-links">
           <a href="#" aria-label="Facebook"
@@ -496,6 +549,16 @@
         </div>
       </div>
     </footer>
+
+    <a
+      href="https://wa.me/31612345678"
+      class="whatsapp-fab"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Chat via WhatsApp"
+    >
+      <i class="fab fa-whatsapp"></i>
+    </a>
 
     <script src="script.js"></script>
   </body>

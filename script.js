@@ -1,15 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
   // --- Navbar Functionaliteit ---
   const pageHeader = document.getElementById("page-header");
-  const navMenuLinks = document.querySelectorAll("ul.nav-links a.nav-link"); // Preciezere selector
+  const navMenuLinks = document.querySelectorAll("ul.nav-links a.nav-link");
   const sections = document.querySelectorAll("main section[id]");
-  const navbarHeight = pageHeader ? pageHeader.offsetHeight : 70; // Dynamische hoogte of fallback
+  const navbarHeight = pageHeader ? pageHeader.offsetHeight : 70;
 
   function handleNavbarScroll() {
     if (pageHeader) {
-      // Controleer of pageHeader bestaat
       if (window.scrollY > 50) {
-        // Verander 50 naar gewenste scrollafstand
         pageHeader.classList.add("scrolled");
       } else {
         pageHeader.classList.remove("scrolled");
@@ -17,17 +15,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Functie voor actieve link markering bij scrollen
   function highlightActiveLink() {
     let currentSectionId = "";
-    // Gebruik een kleine offset om de detectie te verbeteren wanneer een sectie net in beeld komt
     const scrollPosition =
       window.scrollY + navbarHeight + Math.min(50, window.innerHeight / 3);
 
     sections.forEach((section) => {
       const sectionTop = section.offsetTop;
       const sectionHeight = section.offsetHeight;
-      // Controleer of de scrollpositie binnen de grenzen van de sectie valt
       if (
         scrollPosition >= sectionTop &&
         scrollPosition < sectionTop + sectionHeight
@@ -36,7 +31,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    // Speciale behandeling voor de hero sectie als deze bovenaan staat
     if (
       sections.length > 0 &&
       window.scrollY < sections[0].offsetTop - navbarHeight - 50 &&
@@ -47,25 +41,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
     navMenuLinks.forEach((link) => {
       link.classList.remove("active-link");
-      // Controleer of de href van de link (na de #) overeenkomt met de huidige sectie ID
       if (link.getAttribute("href") === `#${currentSectionId}`) {
         link.classList.add("active-link");
       }
     });
   }
 
-  // Event listeners voor scrollen
   window.addEventListener("scroll", () => {
     handleNavbarScroll();
     highlightActiveLink();
   });
-  // Initiele check bij laden van de pagina
   handleNavbarScroll();
   highlightActiveLink();
 
   // --- Mobiele Navigatie ---
   const hamburger = document.querySelector(".hamburger-menu");
-  const navLinksContainer = document.querySelector("ul.nav-links"); // Preciezere selector
+  const navLinksContainer = document.querySelector("ul.nav-links");
 
   if (hamburger && navLinksContainer) {
     hamburger.addEventListener("click", () => {
@@ -73,9 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
       hamburger.classList.toggle("active");
     });
 
-    // Sluit mobiel menu wanneer op een link wordt geklikt
     navLinksContainer.querySelectorAll("a.nav-link").forEach((link) => {
-      // Specifieker naar .nav-link
       link.addEventListener("click", () => {
         if (navLinksContainer.classList.contains("active")) {
           navLinksContainer.classList.remove("active");
@@ -109,30 +98,23 @@ document.addEventListener("DOMContentLoaded", function () {
     function updateSlidePosition() {
       const carousel = document.querySelector(".testimonial-carousel");
       if (!carousel) return;
-
       const viewportWidth = carousel.offsetWidth;
       const activeSlide = slides[currentSlideIndex];
       if (!activeSlide) return;
-
       const slideStyle = getComputedStyle(activeSlide);
       const slideWidth = activeSlide.offsetWidth;
       const marginLeft = parseFloat(slideStyle.marginLeft);
       const slideWidthWithMargin =
         slideWidth + marginLeft + parseFloat(slideStyle.marginRight);
-
       const targetOffsetForActiveSlide = (viewportWidth - slideWidth) / 2;
       const totalOffsetToActiveSlideEdge =
         currentSlideIndex * slideWidthWithMargin + marginLeft;
-
       let finalTransformX =
         targetOffsetForActiveSlide - totalOffsetToActiveSlideEdge;
-
       track.style.transform = `translateX(${finalTransformX}px)`;
-
       slides.forEach((slide, index) => {
         slide.classList.toggle("active", index === currentSlideIndex);
       });
-
       updateDots();
     }
 
@@ -153,7 +135,6 @@ document.addEventListener("DOMContentLoaded", function () {
         dotsContainer.appendChild(dot);
       });
     }
-
     function updateDots() {
       if (!dotsContainer) return;
       const dots = dotsContainer.children;
@@ -161,29 +142,23 @@ document.addEventListener("DOMContentLoaded", function () {
         dot.classList.toggle("active", index === currentSlideIndex);
       });
     }
-
     function goToSlide(slideIndex) {
       currentSlideIndex = (slideIndex + slides.length) % slides.length;
       updateSlidePosition();
     }
-
     function nextSlide() {
       goToSlide(currentSlideIndex + 1);
     }
-
     function prevSlide() {
       goToSlide(currentSlideIndex - 1);
     }
-
     function startAutoScroll() {
       stopAutoScroll();
       autoScrollInterval = setInterval(nextSlide, AUTOSCROLL_DELAY);
     }
-
     function stopAutoScroll() {
       clearInterval(autoScrollInterval);
     }
-
     function restartAutoScroll() {
       stopAutoScroll();
       startAutoScroll();
@@ -201,14 +176,12 @@ document.addEventListener("DOMContentLoaded", function () {
         restartAutoScroll();
       });
     }
-
     if (carouselWrapper) {
       carouselWrapper.addEventListener("mouseenter", stopAutoScroll);
       carouselWrapper.addEventListener("mouseleave", startAutoScroll);
       carouselWrapper.addEventListener("focusin", stopAutoScroll);
       carouselWrapper.addEventListener("focusout", startAutoScroll);
     }
-
     if (slides.length > 0) {
       createDots();
       requestAnimationFrame(() => {
@@ -216,7 +189,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
       startAutoScroll();
     }
-
     let resizeTimeout;
     window.addEventListener("resize", () => {
       clearTimeout(resizeTimeout);
@@ -288,11 +260,11 @@ document.addEventListener("DOMContentLoaded", function () {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const delay = entry.target.dataset.animationDelay || "0s";
-          entry.target.style.transitionDelay = delay;
+          entry.target.style.transitionDelay = delay; // Apply delay
           entry.target.classList.add("is-visible");
         } else {
-          // entry.target.classList.remove("is-visible"); // Voor herhaalde animatie
-          // entry.target.style.transitionDelay = '0s';
+          // entry.target.classList.remove("is-visible"); // For repeated animation
+          // entry.target.style.transitionDelay = '0s'; // Reset delay
         }
       });
     },
