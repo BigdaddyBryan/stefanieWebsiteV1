@@ -1,14 +1,20 @@
 /* Basisstijlen & Variabelen */
 :root {
     --brand-dark: #3C3633;
-    --text-light: #FDFBF7;
-    --bg-main: #FCF9F3;
-    --bg-section-light: #F7F3EC;
-    --bg-section-medium: #F0E9DD;
-    --accent-beige-light: #EADEDA;
-    --accent-beige-dark: #B0A695;
+    --text-light: #FEFEFE;
+    --bg-main: #FDFCF9;
+    /* Aangepast van #FCF9F3 */
+    --bg-section-light: #F9F6F2;
+    /* Aangepast van #F7F3EC */
+    --bg-section-medium: #F4EFEA;
+    /* Aangepast van #F0E9DD */
+    --accent-beige-light: #F0EAE4;
+    /* Aangepast van #EADEDA */
+    --accent-beige-dark: #B5A696;
+    /* Aangepast van #B0A695 */
     --card-bg: #FFFFFF;
-    --border-color: #E0D8CC;
+    --border-color: #EAE2D8;
+    /* Aangepast van #E0D8CC */
     --navbar-height: 70px;
     --font-family: 'Montserrat', sans-serif;
     --whatsapp-green: #25D366;
@@ -326,13 +332,27 @@ img {
 }
 
 #over-mij .image-content {
-    flex: 0 0 350px;
-    text-align: center;
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: center;
 }
 
 #over-mij .image-content img {
     border-radius: 10px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#over-mij .image-content img:first-child {
+    transform: rotate(-3deg) translateY(-10px);
+}
+
+#over-mij .image-content img:last-child {
+    transform: rotate(3deg) translateY(10px);
 }
 
 /* Werkwijze Sectie & Service Kaarten */
@@ -360,12 +380,11 @@ img {
 }
 
 .service-icon {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 1.25rem auto;
-    border-radius: 50%;
+    width: 100%;
+    height: 180px;
+    margin-bottom: 1.25rem;
+    border-radius: 8px;
     object-fit: cover;
-    border: 3px solid var(--accent-beige-light);
 }
 
 .service-card h3 {
@@ -381,6 +400,28 @@ img {
 
 .service-card .btn {
     margin-top: auto;
+}
+
+/* Praktijk Galerij Sectie */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 /* Tarieven Sectie */
@@ -950,8 +991,15 @@ footer a:hover {
     }
 
     #over-mij .image-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
         margin-top: 2rem;
-        max-width: 300px;
+        max-width: 350px;
+    }
+
+    #over-mij .image-content img:first-child,
+    #over-mij .image-content img:last-child {
+        transform: rotate(0) translateY(0);
     }
 
     .testimonial-slide {
