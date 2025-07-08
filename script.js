@@ -85,12 +85,12 @@ document.addEventListener("DOMContentLoaded", function () {
     ".testimonial-carousel-wrapper"
   );
   const track = document.querySelector(".testimonial-track");
-  const slides = Array.from(track ? track.children : []);
   const nextButton = document.querySelector(".carousel-btn.next");
   const prevButton = document.querySelector(".carousel-btn.prev");
   const dotsContainer = document.querySelector(".carousel-dots");
 
-  if (track && slides.length > 0) {
+  if (track && track.children.length > 0) {
+    const slides = Array.from(track.children);
     let currentSlideIndex = 0;
     let autoScrollInterval;
     const AUTOSCROLL_DELAY = 7000;
@@ -182,13 +182,13 @@ document.addEventListener("DOMContentLoaded", function () {
       carouselWrapper.addEventListener("focusin", stopAutoScroll);
       carouselWrapper.addEventListener("focusout", startAutoScroll);
     }
-    if (slides.length > 0) {
-      createDots();
-      requestAnimationFrame(() => {
-        updateSlidePosition();
-      });
-      startAutoScroll();
-    }
+
+    createDots();
+    requestAnimationFrame(() => {
+      updateSlidePosition();
+    });
+    startAutoScroll();
+
     let resizeTimeout;
     window.addEventListener("resize", () => {
       clearTimeout(resizeTimeout);
@@ -214,6 +214,10 @@ document.addEventListener("DOMContentLoaded", function () {
     if (modal == null) return;
     modal.classList.add("active");
     document.body.style.overflow = "hidden";
+    const focusableElement = modal.querySelector(".close-modal-btn");
+    if (focusableElement) {
+      focusableElement.focus();
+    }
   }
 
   function closeModal(modal) {
@@ -222,58 +226,65 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.style.overflow = "auto";
   }
 
-  openModalButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const modal = document.querySelector(button.dataset.modalTarget);
-      openModal(modal);
+  if (openModalButtons.length > 0) {
+    openModalButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const modal = document.querySelector(button.dataset.modalTarget);
+        openModal(modal);
+      });
     });
-  });
+  }
 
-  closeModalButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const modal = button.closest(".modal");
-      closeModal(modal);
-    });
-  });
-
-  closeModalInlineButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const modal = button.closest(".modal");
-      closeModal(modal);
-    });
-  });
-
-  modals.forEach((modal) => {
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
+  if (closeModalButtons.length > 0) {
+    closeModalButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const modal = button.closest(".modal");
         closeModal(modal);
-      }
+      });
     });
-  });
+  }
+
+  if (closeModalInlineButtons.length > 0) {
+    closeModalInlineButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const modal = button.closest(".modal");
+        closeModal(modal);
+      });
+    });
+  }
+
+  if (modals.length > 0) {
+    modals.forEach((modal) => {
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          closeModal(modal);
+        }
+      });
+    });
+  }
 
   // --- Scroll Animaties voor Secties ---
   const scrollAnimatedElements =
     document.querySelectorAll(".animate-on-scroll");
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const delay = entry.target.dataset.animationDelay || "0s";
-          entry.target.style.transitionDelay = delay; // Apply delay
-          entry.target.classList.add("is-visible");
-        } else {
-          // entry.target.classList.remove("is-visible"); // For repeated animation
-          // entry.target.style.transitionDelay = '0s'; // Reset delay
-        }
-      });
-    },
-    {
-      threshold: 0.1,
-    }
-  );
+  if (scrollAnimatedElements.length > 0) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const delay = entry.target.dataset.animationDelay || "0s";
+            entry.target.style.transitionDelay = delay;
+            entry.target.classList.add("is-visible");
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+      }
+    );
 
-  scrollAnimatedElements.forEach((el) => {
-    observer.observe(el);
-  });
+    scrollAnimatedElements.forEach((el) => {
+      observer.observe(el);
+    });
+  }
 });
