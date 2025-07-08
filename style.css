@@ -263,7 +263,8 @@ img {
 }
 
 .hero-section h1 {
-    font-size: 3.2rem;
+    /* Schaal vloeiend van 2.4rem op 768px naar 3.2rem op 1100px */
+    font-size: clamp(2.4rem, 1.6rem + 2.5vw, 3.2rem);
     margin-bottom: 1.5rem;
     font-weight: 700;
 }
@@ -978,9 +979,7 @@ footer {
         font-size: 2.2rem;
     }
 
-    .hero-section h1 {
-        font-size: 2.4rem;
-    }
+    /* h1 in hero-section wordt nu beheerd door clamp() */
 
     .hero-section p {
         font-size: 1.1rem;
@@ -1139,10 +1138,6 @@ footer {
 
     .carousel-btn.next {
         right: -5px;
-    }
-
-    .hero-section h1 {
-        font-size: 2rem;
     }
 
     .hero-section p {
