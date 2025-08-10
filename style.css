@@ -1,79 +1,90 @@
-/* Basisstijlen & Variabelen */
+/* ===== Basisthema (ongewijzigd) ===== */
 :root {
     --brand-dark: #3C3633;
     --text-light: #FEFEFE;
     --bg-main: #FDFCF9;
-    /* Aangepast van #FCF9F3 */
     --bg-section-light: #F9F6F2;
-    /* Aangepast van #F7F3EC */
     --bg-section-medium: #F4EFEA;
-    /* Aangepast van #F0E9DD */
     --accent-beige-light: #F0EAE4;
-    /* Aangepast van #EADEDA */
     --accent-beige-dark: #B5A696;
-    /* Aangepast van #B0A695 */
     --card-bg: #FFFFFF;
     --border-color: #EAE2D8;
-    /* Aangepast van #E0D8CC */
     --navbar-height: 70px;
     --font-family: 'Montserrat', sans-serif;
     --whatsapp-green: #25D366;
 }
 
+/* Reset + basics */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
+    box-sizing: border-box
+}
+
+html {
+    scroll-behavior: smooth
 }
 
 body {
     font-family: var(--font-family);
     line-height: 1.6;
     color: var(--brand-dark);
-    background-color: var(--bg-main);
+    background: var(--bg-main);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     padding-top: var(--navbar-height);
+}
+
+:where(section[id]) {
+    scroll-margin-top: calc(var(--navbar-height) + 16px)
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px
+}
+
+a {
+    color: inherit;
+    text-decoration: none
 }
 
 .container {
     width: 90%;
     max-width: 1100px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 20px
 }
 
 .section-padding {
-    padding-top: 80px;
-    padding-bottom: 80px;
+    padding: 80px 0
 }
 
 #hero.section-padding {
     padding-top: 20px;
-    min-height: calc(90vh - var(--navbar-height));
+    min-height: calc(90vh - var(--navbar-height))
 }
-
 
 h1,
 h2,
 h3 {
     margin-bottom: 1rem;
     font-weight: 600;
-    color: var(--brand-dark);
+    color: var(--brand-dark)
 }
 
 h1 {
-    font-size: 2.8rem;
+    font-size: clamp(2.4rem, 1.6rem + 2.5vw, 3.2rem)
 }
 
 h2 {
     font-size: 2.3rem;
-    color: var(--brand-dark);
     text-align: center;
     margin-bottom: 3.5rem;
     position: relative;
-    padding-bottom: 0.85rem;
+    padding-bottom: .85rem
 }
 
 h2::after {
@@ -84,19 +95,19 @@ h2::after {
     transform: translateX(-50%);
     width: 75px;
     height: 3.5px;
-    background-color: var(--accent-beige-dark);
-    border-radius: 2px;
+    background: var(--accent-beige-dark);
+    border-radius: 2px
 }
 
 h3 {
     font-size: 1.5rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: .75rem
 }
 
 p {
     margin-bottom: 1rem;
     font-size: 1rem;
-    font-weight: 300;
+    font-weight: 300
 }
 
 .section-intro-text,
@@ -104,95 +115,89 @@ p {
     font-size: 1.05rem;
     text-align: center;
     max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 2.5rem;
-    color: #555;
+    margin: 0 auto 2.5rem;
+    color: #555
 }
 
 .section-outro-text {
     margin-top: 2.5rem;
     margin-bottom: 0;
-    font-size: 0.95rem;
+    font-size: .95rem
 }
 
-a {
-    text-decoration: none;
-    color: var(--brand-dark);
+/* ===== Skip link ===== */
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden
 }
 
-img {
-    max-width: 100%;
+.skip-link:focus {
+    position: fixed;
+    left: 16px;
+    top: 16px;
+    width: auto;
     height: auto;
-    display: block;
-    border-radius: 8px;
+    padding: 10px 14px;
+    background: #fff;
+    color: #111;
+    z-index: 1000;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .15)
 }
 
-/* --- Navbar Stijlen --- */
+/* ===== Navbar ===== */
 #page-header {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
+    inset: 0 0 auto 0;
+    z-index: 1000
 }
 
 .navbar {
     height: var(--navbar-height);
     display: flex;
     align-items: center;
-    background-color: rgba(252, 249, 243, 0.92);
-    transition: background-color 0.4s ease, box-shadow 0.4s ease;
-}
-
-#page-header:not(.scrolled) .logo,
-#page-header:not(.scrolled) .nav-link {
-    color: var(--brand-dark);
-}
-
-#page-header:not(.scrolled) .hamburger-menu span {
-    background-color: var(--brand-dark);
-}
-
-#page-header:not(.scrolled) .nav-link:hover {
-    color: var(--accent-beige-dark);
+    background: rgba(252, 249, 243, .92);
+    transition: background-color .4s ease, box-shadow .4s ease
 }
 
 #page-header.scrolled .navbar {
-    background-color: var(--bg-main);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
+    background: var(--bg-main);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .07)
 }
 
 .navbar-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    width: 100%
 }
 
 .logo {
     font-size: 1.6rem;
     font-weight: 700;
-    letter-spacing: 1px;
-    transition: color 0.3s ease;
+    letter-spacing: 1px
 }
 
 .nav-links {
     list-style: none;
     display: flex;
-    align-items: center;
+    align-items: center
 }
 
 .nav-links li {
-    margin-left: 2.5rem;
+    margin-left: 2.2rem
 }
 
 .nav-link {
     font-weight: 500;
-    font-size: 0.95rem;
-    transition: color 0.3s ease;
+    font-size: .95rem;
+    transition: color .3s ease;
     position: relative;
-    padding-bottom: 5px;
+    padding-bottom: 5px
 }
 
 .nav-link::after {
@@ -202,40 +207,45 @@ img {
     height: 2px;
     bottom: 0;
     left: 50%;
-    background-color: var(--accent-beige-dark);
-    transition: width 0.3s ease, left 0.3s ease;
+    background: var(--accent-beige-dark);
+    transition: width .3s ease, left .3s ease
 }
 
 .nav-link:hover::after,
 .nav-link.active-link::after {
     width: 100%;
-    left: 0;
+    left: 0
 }
 
 .nav-link.active-link {
     color: var(--accent-beige-dark);
-    font-weight: 700;
+    font-weight: 700
 }
 
 .hamburger-menu {
     display: none;
     cursor: pointer;
+    background: transparent;
+    border: 0;
+    padding: 8px;
+    border-radius: 8px
+}
+
+.hamburger-menu:focus-visible {
+    outline: 3px solid var(--accent-beige-dark)
 }
 
 .hamburger-menu span {
     display: block;
     width: 25px;
     height: 2px;
-    background-color: var(--brand-dark);
+    background: var(--brand-dark);
     margin: 6px 0;
-    transition: 0.3s ease;
     border-radius: 1px;
+    transition: .3s ease
 }
 
-/* --- Einde Navbar Stijlen --- */
-
-
-/* Hero Section */
+/* ===== Hero (gradient zoals je had) ===== */
 .hero-section {
     color: var(--brand-dark);
     display: flex;
@@ -245,96 +255,90 @@ img {
     background: linear-gradient(-45deg, var(--bg-section-medium), var(--accent-beige-light), var(--bg-section-light), var(--bg-section-medium));
     background-size: 400% 400%;
     animation: gradientBG 25s ease infinite;
-    overflow: hidden;
+    overflow: hidden
 }
 
 @keyframes gradientBG {
     0% {
-        background-position: 0% 50%;
+        background-position: 0% 50%
     }
 
     50% {
-        background-position: 100% 50%;
+        background-position: 100% 50%
     }
 
     100% {
-        background-position: 0% 50%;
+        background-position: 0% 50%
     }
-}
-
-.hero-section h1 {
-    /* Schaal vloeiend van 2.4rem op 768px naar 3.2rem op 1100px */
-    font-size: clamp(2.4rem, 1.6rem + 2.5vw, 3.2rem);
-    margin-bottom: 1.5rem;
-    font-weight: 700;
 }
 
 .hero-section p {
     font-size: 1.25rem;
-    margin-bottom: 2.5rem;
+    margin: 0 auto 2.5rem;
     font-weight: 300;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
+    max-width: 700px
 }
 
-/* Knoppen */
+/* ===== Buttons ===== */
 .btn {
     display: inline-block;
-    padding: 0.9rem 2rem;
+    padding: .9rem 2rem;
     border-radius: 8px;
-    text-decoration: none;
     font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.2s ease;
     font-size: 1rem;
+    transition: background-color .3s ease, transform .2s ease, border-color .3s ease, color .3s ease, box-shadow .2s ease;
     border: 2px solid transparent;
-    cursor: pointer;
+    cursor: pointer
 }
 
 .btn-primary {
-    background-color: var(--brand-dark);
+    background: var(--brand-dark);
     color: var(--text-light);
-    border-color: var(--brand-dark);
+    border-color: var(--brand-dark)
 }
 
 .btn-primary:hover {
-    background-color: var(--accent-beige-dark);
+    background: var(--accent-beige-dark);
     color: var(--brand-dark);
     border-color: var(--accent-beige-dark);
-    transform: translateY(-3px);
+    transform: translateY(-3px)
 }
 
 .btn-secondary {
-    background-color: transparent;
+    background: transparent;
     color: var(--accent-beige-dark);
-    border-color: var(--accent-beige-dark);
+    border-color: var(--accent-beige-dark)
 }
 
 .btn-secondary:hover {
-    background-color: var(--accent-beige-dark);
+    background: var(--accent-beige-dark);
     color: var(--card-bg);
-    transform: translateY(-3px);
+    transform: translateY(-3px)
 }
 
 .btn:active {
-    transform: translateY(-1px) scale(0.98);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px) scale(.98);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .15)
 }
 
-/* Content Sections */
+.btn:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--accent-beige-dark), #000 10%)
+}
+
+/* ===== Content ===== */
 .bg-section-light {
-    background-color: var(--bg-section-light);
+    background: var(--bg-section-light)
 }
 
-/* Over Mij Sectie */
+/* Over Mij */
 #over-mij .flex-container {
     display: flex;
     align-items: center;
-    gap: 3rem;
+    gap: 3rem
 }
 
 #over-mij .text-content {
-    flex: 1;
+    flex: 1
 }
 
 #over-mij .image-content {
@@ -342,47 +346,47 @@ img {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
-    align-items: center;
+    align-items: center
 }
 
 #over-mij .image-content img {
     border-radius: 10px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .08);
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover
 }
 
 #over-mij .image-content img:first-child {
-    transform: rotate(-3deg) translateY(-10px);
+    transform: rotate(-3deg) translateY(-10px)
 }
 
 #over-mij .image-content img:last-child {
-    transform: rotate(3deg) translateY(10px);
+    transform: rotate(3deg) translateY(10px)
 }
 
-/* Werkwijze Sectie & Service Kaarten */
+/* Werkwijze */
 .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2.5rem;
+    gap: 2.5rem
 }
 
 .service-card {
-    background-color: var(--card-bg);
+    background: var(--card-bg);
     padding: 2rem;
     border-radius: 12px;
     text-align: center;
-    box-shadow: 0 8px 25px rgba(176, 166, 149, 0.1);
-    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 8px 25px rgba(176, 166, 149, .1);
+    transition: transform .4s cubic-bezier(.25, .8, .25, 1), box-shadow .4s cubic-bezier(.25, .8, .25, 1);
     border: 1px solid var(--border-color);
     display: flex;
-    flex-direction: column;
+    flex-direction: column
 }
 
 .service-card:hover {
-    transform: translateY(-15px);
-    box-shadow: 0 20px 40px rgba(176, 166, 149, 0.22);
+    transform: translateY(-12px);
+    box-shadow: 0 18px 35px rgba(176, 166, 149, .18)
 }
 
 .service-icon {
@@ -390,30 +394,25 @@ img {
     height: 180px;
     margin-bottom: 1.25rem;
     border-radius: 8px;
-    object-fit: cover;
-}
-
-.service-card h3 {
-    margin-bottom: 0.75rem;
-    font-size: 1.3rem;
+    object-fit: cover
 }
 
 .service-card p {
-    font-size: 0.9rem;
+    font-size: .95rem;
     margin-bottom: 1.5rem;
-    flex-grow: 1;
+    flex-grow: 1
 }
 
 .service-card .btn {
-    margin-top: auto;
+    margin-top: auto
 }
 
-/* Praktijk Galerij Sectie */
+/* Galerij */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
-    margin-top: 3rem;
+    margin-top: 3rem
 }
 
 .gallery-item img {
@@ -421,86 +420,70 @@ img {
     height: 300px;
     object-fit: cover;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .1);
+    transition: transform .4s ease, box-shadow .4s ease
 }
 
 .gallery-item img:hover {
     transform: scale(1.05);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .15)
 }
 
-/* Tarieven Sectie */
+/* Tarieven */
 .tarieven-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    gap: 2rem
 }
 
 .tarief-card {
-    background-color: var(--card-bg);
+    background: var(--card-bg);
     padding: 2.5rem 2rem;
     border-radius: 12px;
     text-align: center;
     border: 1px solid var(--border-color);
-    box-shadow: 0 8px 25px rgba(176, 166, 149, 0.08);
-    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 8px 25px rgba(176, 166, 149, .08);
+    transition: transform .4s cubic-bezier(.25, .8, .25, 1), box-shadow .4s cubic-bezier(.25, .8, .25, 1);
     display: flex;
-    flex-direction: column;
+    flex-direction: column
 }
 
 .tarief-card:hover {
-    transform: translateY(-12px);
-    box-shadow: 0 18px 35px rgba(176, 166, 149, 0.18);
+    transform: translateY(-10px);
+    box-shadow: 0 18px 35px rgba(176, 166, 149, .18)
 }
 
 .tarief-card-highlighted {
     border: 2px solid var(--accent-beige-dark);
-    box-shadow: 0 10px 30px rgba(176, 166, 149, 0.15);
-}
-
-.tarief-card-highlighted:hover {
-    box-shadow: 0 20px 45px rgba(176, 166, 149, 0.25);
+    box-shadow: 0 10px 30px rgba(176, 166, 149, .15)
 }
 
 .tarief-icon {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     color: var(--accent-beige-dark);
-    margin-bottom: 1rem;
-}
-
-.tarief-card h3 {
-    font-size: 1.4rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem
 }
 
 .tarief-prijs {
     font-size: 1.8rem;
     font-weight: 600;
     color: var(--brand-dark);
-    margin-bottom: 1rem;
-}
-
-.tarief-card p {
-    font-size: 0.9rem;
-    color: #555;
-    margin-bottom: 1.5rem;
-    flex-grow: 1;
+    margin-bottom: 1rem
 }
 
 .tarief-features {
     list-style: none;
     padding: 0;
     margin-bottom: 1.5rem;
-    font-size: 0.9rem;
+    font-size: .95rem;
     text-align: left;
-    flex-grow: 1;
+    flex-grow: 1
 }
 
 .tarief-features li {
-    margin-bottom: 0.5rem;
+    margin-bottom: .5rem;
     padding-left: 1.5em;
-    position: relative;
+    position: relative
 }
 
 .tarief-features li::before {
@@ -509,64 +492,58 @@ img {
     font-weight: 900;
     color: var(--accent-beige-dark);
     position: absolute;
-    left: 0;
+    left: 0
 }
 
-.tarief-card .btn {
-    margin-top: auto;
-}
-
-
-/* Reviews Section - Slider */
+/* Reviews / Carousel */
 .testimonial-section-container {
     max-width: 900px;
     margin: 0 auto;
-    position: relative;
+    position: relative
 }
 
 .testimonial-carousel-wrapper {
     position: relative;
     width: 100%;
     padding: 0 50px;
-    box-sizing: border-box;
+    box-sizing: border-box
 }
 
 .testimonial-carousel {
     overflow: hidden;
-    width: 100%;
+    width: 100%
 }
 
 .testimonial-track {
     display: flex;
-    transition: transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: transform .5s cubic-bezier(.645, .045, .355, 1)
 }
 
 .testimonial-slide {
     flex: 0 0 70%;
     margin: 0 1.5%;
-    box-sizing: border-box;
-    opacity: 0.4;
-    transform: scale(0.85);
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-    will-change: transform, opacity;
+    opacity: .4;
+    transform: scale(.85);
+    transition: opacity .5s ease, transform .5s ease;
+    will-change: transform, opacity
 }
 
 .testimonial-slide.active {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1)
 }
 
 .testimonial-content {
-    background-color: var(--card-bg);
+    background: var(--card-bg);
     padding: 2rem 2.5rem;
     border-radius: 10px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .08);
     border-left: 5px solid var(--accent-beige-dark);
     min-height: 190px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    text-align: left;
+    text-align: left
 }
 
 .testimonial-content p {
@@ -574,192 +551,160 @@ img {
     font-size: 1.05rem;
     margin-bottom: 1rem;
     color: #444;
-    flex-grow: 1;
+    flex-grow: 1
 }
 
 .testimonial-content h4 {
     font-weight: 600;
     color: var(--brand-dark);
-    font-size: 0.95rem;
-    text-align: right;
+    font-size: .95rem;
+    text-align: right
 }
 
 .carousel-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, .9);
     border: 1px solid var(--border-color);
     color: var(--brand-dark);
-    font-size: 1.8rem;
-    padding: 0.6rem 0.9rem;
+    font-size: 1.6rem;
+    padding: .55rem .85rem;
     border-radius: 50%;
     cursor: pointer;
     z-index: 10;
-    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    line-height: 1;
+    transition: background-color .3s ease, color .3s ease, box-shadow .3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
+    line-height: 1
 }
 
 .carousel-btn:hover {
-    background-color: var(--accent-beige-dark);
-    color: var(--text-light);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background: var(--accent-beige-dark);
+    color: var(--text-light)
 }
 
 .carousel-btn.prev {
-    left: 0px;
+    left: 0
 }
 
 .carousel-btn.next {
-    right: 0px;
+    right: 0
 }
 
 .carousel-dots {
     text-align: center;
-    margin-top: 2rem;
+    margin-top: 2rem
 }
 
 .carousel-dots .dot {
     display: inline-block;
     width: 10px;
     height: 10px;
-    background-color: var(--border-color);
+    background: var(--border-color);
     border-radius: 50%;
     margin: 0 6px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: background-color .3s ease, transform .3s ease
 }
 
 .carousel-dots .dot.active {
-    background-color: var(--accent-beige-dark);
-    transform: scale(1.3);
+    background: var(--accent-beige-dark);
+    transform: scale(1.3)
 }
 
-/* Contact Section */
+/* Contact */
 .contact-form {
     max-width: 600px;
     margin: 2rem auto;
     padding: 2.5rem;
-    background-color: var(--card-bg);
+    background: var(--card-bg);
     border-radius: 10px;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.07);
-    border: 1px solid var(--border-color);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, .07);
+    border: 1px solid var(--border-color)
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.5rem
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
+    margin-bottom: .5rem;
+    font-weight: 600
 }
 
 .form-group input,
 .form-group textarea {
     width: 100%;
-    padding: 0.9rem;
+    padding: .9rem;
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    font-family: var(--font-family);
-    background-color: var(--bg-main);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background: var(--bg-main);
+    transition: border-color .3s ease, box-shadow .3s ease
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
     border-color: var(--accent-beige-dark);
-    box-shadow: 0 0 0 3px rgba(176, 166, 149, 0.25);
+    box-shadow: 0 0 0 3px rgba(176, 166, 149, .25)
 }
 
 .contact-form button[type="submit"] {
     display: block;
-    width: 100%;
+    width: 100%
 }
 
 .contact-details {
     text-align: center;
-    margin-top: 2.5rem;
-}
-
-.contact-details p {
-    margin-bottom: 0.75rem;
+    margin-top: 2.5rem
 }
 
 .contact-details a {
-    font-weight: 600;
+    font-weight: 600
 }
 
 .contact-details a:hover {
-    color: var(--accent-beige-dark);
+    color: var(--accent-beige-dark)
 }
 
-/* --- Modal Stijlen --- */
+/* Modals */
 .modal {
     display: none;
     position: fixed;
     z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     overflow: auto;
-    background-color: rgba(60, 54, 51, 0.7);
+    background: rgba(60, 54, 51, .7);
     opacity: 0;
-    transition: opacity 0.4s ease-in-out;
-    padding-top: 50px;
+    transition: opacity .35s ease;
+    padding-top: 50px
 }
 
 .modal.active {
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 1;
+    opacity: 1
 }
 
 .modal-content {
-    background-color: var(--bg-main);
+    background: var(--bg-main);
     margin: auto;
     padding: 30px 40px;
     border-radius: 12px;
     width: 90%;
     max-width: 700px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
     position: relative;
-    transform: scale(0.95);
-    transition: transform 0.4s ease-in-out;
+    transform: scale(.96);
+    transition: transform .35s ease;
     max-height: 85vh;
-    overflow-y: auto;
+    overflow-y: auto
 }
 
 .modal.active .modal-content {
-    transform: scale(1);
-}
-
-.modal-content h3 {
-    margin-top: 0;
-    margin-bottom: 1.5rem;
-    font-size: 1.8rem;
-    color: var(--brand-dark);
-}
-
-.modal-content p,
-.modal-content ul {
-    margin-bottom: 1rem;
-    font-size: 0.95rem;
-    line-height: 1.7;
-}
-
-.modal-content ul {
-    list-style-position: inside;
-    padding-left: 10px;
-}
-
-.modal-content ul li {
-    margin-bottom: 0.5rem;
+    transform: scale(1)
 }
 
 .modal-image {
@@ -767,7 +712,7 @@ img {
     max-height: 250px;
     object-fit: cover;
     border-radius: 8px;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.5rem
 }
 
 .close-modal-btn {
@@ -775,75 +720,26 @@ img {
     position: absolute;
     top: 15px;
     right: 25px;
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     font-weight: bold;
     line-height: 1;
+    background: none;
+    border: 0;
+    cursor: pointer
 }
 
 .close-modal-btn:hover,
 .close-modal-btn:focus {
-    color: var(--brand-dark);
-    text-decoration: none;
-    cursor: pointer;
+    color: var(--brand-dark)
 }
 
-.close-modal-inline-btn {
-    display: block;
-    margin: 1.5rem auto 0;
-    width: fit-content;
-}
-
-/* --- Scroll Animaties --- */
-.animate-on-load {
-    opacity: 0;
-    animation-name: fadeInUp;
-    animation-duration: 0.8s;
-    animation-timing-function: ease-out;
-    animation-fill-mode: forwards;
-}
-
-.animate-on-load.delay-1 {
-    animation-delay: 0.3s;
-}
-
-.animate-on-load.delay-2 {
-    animation-delay: 0.6s;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.animate-on-scroll {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-        transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.animate-on-scroll.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* data-animation-delay wordt direct in JS gebruikt */
-
-
-/* --- Vaste WhatsApp Knop --- */
+/* WhatsApp FAB */
 .whatsapp-fab {
     position: fixed;
     bottom: 25px;
     right: 25px;
-    background-color: var(--whatsapp-green);
-    color: white;
+    background: var(--whatsapp-green);
+    color: #fff;
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -851,32 +747,28 @@ img {
     align-items: center;
     justify-content: center;
     font-size: 2rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .2);
     z-index: 999;
-    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.3s ease;
+    transition: transform .3s cubic-bezier(.25, .8, .25, 1), background-color .3s ease
 }
 
 .whatsapp-fab:hover {
     transform: scale(1.1) rotate(5deg);
-    background-color: #128C7E;
+    background: #128C7E
 }
 
-/* --- Nieuwe Footer Stijlen --- */
+/* Footer */
 footer {
-    background-color: var(--brand-dark);
+    background: var(--brand-dark);
     color: var(--bg-section-light);
-    padding: 50px 0 0;
+    padding: 50px 0 0
 }
 
 .footer-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 2rem;
-    padding-bottom: 40px;
-}
-
-.footer-col {
-    padding-right: 20px;
+    padding-bottom: 40px
 }
 
 .footer-col h4 {
@@ -885,7 +777,7 @@ footer {
     font-weight: 600;
     color: var(--text-light);
     position: relative;
-    padding-bottom: 0.5rem;
+    padding-bottom: .5rem
 }
 
 .footer-col h4::after {
@@ -895,33 +787,32 @@ footer {
     bottom: 0;
     width: 40px;
     height: 2px;
-    background-color: var(--accent-beige-dark);
+    background: var(--accent-beige-dark)
 }
 
 .footer-col p {
-    font-size: 0.9rem;
+    font-size: .9rem;
     line-height: 1.7;
-    color: #ccc;
+    color: #ccc
 }
 
 .footer-links {
     list-style: none;
-    padding: 0;
+    padding: 0
 }
 
 .footer-links li {
-    margin-bottom: 0.75rem;
+    margin-bottom: .75rem
 }
 
 .footer-col a {
     color: #ccc;
-    text-decoration: none;
-    transition: color 0.3s ease, padding-left 0.3s ease;
+    transition: color .3s ease, padding-left .3s ease
 }
 
 .footer-col a:hover {
     color: var(--accent-beige-light);
-    padding-left: 5px;
+    padding-left: 5px
 }
 
 .social-links a {
@@ -930,63 +821,84 @@ footer {
     align-items: center;
     width: 40px;
     height: 40px;
-    background-color: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, .1);
     color: var(--text-light);
     border-radius: 50%;
-    margin-right: 0.5rem;
+    margin-right: .5rem;
     font-size: 1rem;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: background-color .3s ease, transform .3s ease
 }
 
 .social-links a:hover {
-    background-color: var(--accent-beige-dark);
+    background: var(--accent-beige-dark);
     color: var(--brand-dark);
-    transform: translateY(-3px);
-    padding-left: 0;
-    /* Reset padding from general link hover */
+    transform: translateY(-3px)
 }
 
 .footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, .1);
     text-align: center;
     padding: 20px 0;
-    font-size: 0.85rem;
-    color: #aaa;
+    font-size: .85rem;
+    color: #aaa
 }
 
-/* Responsive Design */
+/* ===== Animaties ===== */
+.animate-on-load {
+    opacity: 0;
+    animation: fadeInUp .8s ease-out forwards
+}
+
+.animate-on-load.delay-1 {
+    animation-delay: .3s
+}
+
+.animate-on-load.delay-2 {
+    animation-delay: .6s
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px)
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0)
+    }
+}
+
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity .8s cubic-bezier(.175, .885, .32, 1.275), transform .8s cubic-bezier(.175, .885, .32, 1.275)
+}
+
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0)
+}
+
+/* ===== Responsive ===== */
 @media (max-width: 992px) {
     .testimonial-slide {
         flex: 0 0 80%;
-        margin: 0 1%;
+        margin: 0 1%
     }
 
     .testimonial-carousel-wrapper {
-        padding: 0 40px;
+        padding: 0 40px
     }
 
     .nav-links li {
-        margin-left: 1.5rem;
-    }
-
-    .tarieven-grid {
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        margin-left: 1.5rem
     }
 }
 
 @media (max-width: 768px) {
-    h1 {
-        font-size: 2.2rem;
-    }
-
-    /* h1 in hero-section wordt nu beheerd door clamp() */
-
-    .hero-section p {
-        font-size: 1.1rem;
-    }
-
     h2 {
-        font-size: 1.8rem;
+        font-size: 1.8rem
     }
 
     .nav-links {
@@ -996,180 +908,106 @@ footer {
         top: var(--navbar-height);
         left: 0;
         width: 100%;
-        background-color: var(--bg-main);
-        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+        background: var(--bg-main);
+        box-shadow: 0 3px 5px rgba(0, 0, 0, .1);
         padding: 1rem 0;
-        border-top: 1px solid var(--border-color);
+        border-top: 1px solid var(--border-color)
     }
 
     .nav-links.active {
-        display: flex;
+        display: flex
     }
 
     .nav-links li {
         margin: 0;
-        width: 100%;
+        width: 100%
     }
 
     .nav-link {
         display: block;
-        padding: 0.8rem 1.5rem;
+        padding: .85rem 1.5rem;
         text-align: center;
-        width: 100%;
-        color: var(--brand-dark) !important;
+        width: 100%
     }
 
     .nav-link::after {
-        display: none;
+        display: none
     }
 
     .nav-link.active-link {
-        background-color: var(--accent-beige-light);
-        color: var(--brand-dark) !important;
+        background: var(--accent-beige-light)
     }
 
     .hamburger-menu {
-        display: block;
+        display: block
     }
 
     .hamburger-menu.active span:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
+        transform: translateY(8px) rotate(45deg)
     }
 
     .hamburger-menu.active span:nth-child(2) {
-        opacity: 0;
+        opacity: 0
     }
 
     .hamburger-menu.active span:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
+        transform: translateY(-8px) rotate(-45deg)
     }
 
     #over-mij .flex-container {
-        flex-direction: column;
+        flex-direction: column
     }
 
     #over-mij .image-content {
         grid-template-columns: 1fr;
         gap: 2rem;
         margin-top: 2rem;
-        max-width: 350px;
+        max-width: 350px
     }
 
     #over-mij .image-content img:first-child,
     #over-mij .image-content img:last-child {
-        transform: rotate(0) translateY(0);
+        transform: none
     }
 
     .testimonial-slide {
         flex: 0 0 90%;
-        transform: scale(0.95);
-        opacity: 0.5;
-        margin: 0 0.5%;
+        transform: scale(.95);
+        opacity: .5;
+        margin: 0 .5%
     }
 
     .testimonial-slide.active {
         transform: scale(1);
-        opacity: 1;
+        opacity: 1
     }
 
     .testimonial-carousel-wrapper {
-        padding: 0 30px;
-    }
-
-    .carousel-btn.prev {
-        left: 0px;
-    }
-
-    .carousel-btn.next {
-        right: 0px;
-    }
-
-    .testimonial-content p {
-        font-size: 1rem;
-    }
-
-    .testimonial-content {
-        min-height: auto;
-        padding: 1.5rem 2rem;
-    }
-
-    .modal-content {
-        width: 95%;
-        padding: 20px;
-    }
-
-    .modal-content h3 {
-        font-size: 1.5rem;
-    }
-
-    .service-card:hover,
-    .tarief-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 15px 30px rgba(176, 166, 149, 0.16);
-    }
-
-    .whatsapp-fab {
-        width: 55px;
-        height: 55px;
-        font-size: 1.8rem;
-        bottom: 20px;
-        right: 20px;
+        padding: 0 30px
     }
 }
 
 @media (max-width: 480px) {
     .testimonial-slide {
         flex: 0 0 100%;
-        margin: 0;
+        margin: 0
     }
 
     .testimonial-carousel-wrapper {
-        padding: 0 20px;
+        padding: 0 20px
     }
 
     .carousel-btn {
         font-size: 1.5rem;
-        padding: 0.4rem 0.7rem;
+        padding: .4rem .7rem
     }
+}
 
-    .carousel-btn.prev {
-        left: -5px;
-    }
-
-    .carousel-btn.next {
-        right: -5px;
-    }
-
-    .hero-section p {
-        font-size: 1rem;
-    }
-
-    .nav-links li {
-        margin-left: 0;
-    }
-
-    .modal-content {
-        padding: 20px 15px;
-    }
-
-    .modal-content h3 {
-        font-size: 1.3rem;
-    }
-
-    .modal-content p,
-    .modal-content ul {
-        font-size: 0.9rem;
-    }
-
-    .tarieven-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .whatsapp-fab {
-        width: 50px;
-        height: 50px;
-        font-size: 1.6rem;
-        bottom: 15px;
-        right: 15px;
+/* ===== Motion reduce ===== */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important
     }
 }

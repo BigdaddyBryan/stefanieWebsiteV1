@@ -1,86 +1,94 @@
-document.addEventListener("DOMContentLoaded", function () {
-  // --- Navbar Functionaliteit ---
+document.addEventListener("DOMContentLoaded", () => {
+  // ===== Navbar scroll & active link =====
   const pageHeader = document.getElementById("page-header");
   const navMenuLinks = document.querySelectorAll("ul.nav-links a.nav-link");
   const sections = document.querySelectorAll("main section[id]");
   const navbarHeight = pageHeader ? pageHeader.offsetHeight : 70;
 
   function handleNavbarScroll() {
-    if (pageHeader) {
-      if (window.scrollY > 50) {
-        pageHeader.classList.add("scrolled");
-      } else {
-        pageHeader.classList.remove("scrolled");
-      }
+    if (!pageHeader) return;
+    if (window.scrollY > 50) {
+      pageHeader.classList.add("scrolled");
+    } else {
+      pageHeader.classList.remove("scrolled");
     }
   }
 
   function highlightActiveLink() {
-    let currentSectionId = "";
-    const scrollPosition =
+    let currentId = "";
+    const scrollPos =
       window.scrollY + navbarHeight + Math.min(50, window.innerHeight / 3);
-
-    sections.forEach((section) => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.offsetHeight;
-      if (
-        scrollPosition >= sectionTop &&
-        scrollPosition < sectionTop + sectionHeight
-      ) {
-        currentSectionId = section.getAttribute("id");
+    sections.forEach((s) => {
+      const top = s.offsetTop,
+        h = s.offsetHeight;
+      if (scrollPos >= top && scrollPos < top + h) {
+        currentId = s.id;
       }
     });
-
+    // Hero fallback
     if (
-      sections.length > 0 &&
+      sections.length &&
       window.scrollY < sections[0].offsetTop - navbarHeight - 50 &&
       sections[0].id === "hero"
     ) {
-      currentSectionId = "hero";
+      currentId = "hero";
     }
-
-    navMenuLinks.forEach((link) => {
-      link.classList.remove("active-link");
-      if (link.getAttribute("href") === `#${currentSectionId}`) {
-        link.classList.add("active-link");
-      }
+    navMenuLinks.forEach((a) => {
+      a.classList.toggle(
+        "active-link",
+        a.getAttribute("href") === `#${currentId}`
+      );
     });
   }
 
-  window.addEventListener("scroll", () => {
-    handleNavbarScroll();
-    highlightActiveLink();
-  });
+  window.addEventListener(
+    "scroll",
+    () => {
+      handleNavbarScroll();
+      highlightActiveLink();
+    },
+    { passive: true }
+  );
   handleNavbarScroll();
   highlightActiveLink();
 
-  // --- Mobiele Navigatie ---
+  // ===== Mobile nav =====
   const hamburger = document.querySelector(".hamburger-menu");
   const navLinksContainer = document.querySelector("ul.nav-links");
 
   if (hamburger && navLinksContainer) {
-    hamburger.addEventListener("click", () => {
-      navLinksContainer.classList.toggle("active");
-      hamburger.classList.toggle("active");
-    });
+    const toggleNav = () => {
+      const isOpen = navLinksContainer.classList.toggle("active");
+      hamburger.classList.toggle("active", isOpen);
+      // ARIA
+      hamburger.setAttribute("aria-expanded", String(isOpen));
+      hamburger.setAttribute(
+        "aria-label",
+        isOpen ? "Sluit hoofdmenu" : "Open hoofdmenu"
+      );
+    };
+    hamburger.addEventListener("click", toggleNav);
 
+    // Close on link click
     navLinksContainer.querySelectorAll("a.nav-link").forEach((link) => {
       link.addEventListener("click", () => {
         if (navLinksContainer.classList.contains("active")) {
           navLinksContainer.classList.remove("active");
           hamburger.classList.remove("active");
+          hamburger.setAttribute("aria-expanded", "false");
+          hamburger.setAttribute("aria-label", "Open hoofdmenu");
         }
       });
     });
   }
 
-  // --- Footer Actueel Jaar ---
+  // ===== Footer year =====
   const currentYearSpan = document.getElementById("currentYear");
   if (currentYearSpan) {
     currentYearSpan.textContent = new Date().getFullYear();
   }
 
-  // --- Testimonial Carousel ---
+  // ===== Testimonial carousel =====
   const carouselWrapper = document.querySelector(
     ".testimonial-carousel-wrapper"
   );
@@ -99,110 +107,100 @@ document.addEventListener("DOMContentLoaded", function () {
       const carousel = document.querySelector(".testimonial-carousel");
       if (!carousel) return;
       const viewportWidth = carousel.offsetWidth;
-      const activeSlide = slides[currentSlideIndex];
-      if (!activeSlide) return;
-      const slideStyle = getComputedStyle(activeSlide);
-      const slideWidth = activeSlide.offsetWidth;
-      const marginLeft = parseFloat(slideStyle.marginLeft);
-      const slideWidthWithMargin =
-        slideWidth + marginLeft + parseFloat(slideStyle.marginRight);
-      const targetOffsetForActiveSlide = (viewportWidth - slideWidth) / 2;
-      const totalOffsetToActiveSlideEdge =
-        currentSlideIndex * slideWidthWithMargin + marginLeft;
-      let finalTransformX =
-        targetOffsetForActiveSlide - totalOffsetToActiveSlideEdge;
-      track.style.transform = `translateX(${finalTransformX}px)`;
-      slides.forEach((slide, index) => {
-        slide.classList.toggle("active", index === currentSlideIndex);
-      });
+      const active = slides[currentSlideIndex];
+      if (!active) return;
+      const cs = getComputedStyle(active);
+      const w = active.offsetWidth;
+      const ml = parseFloat(cs.marginLeft);
+      const mr = parseFloat(cs.marginRight);
+      const step = w + ml + mr;
+      const centerOffset = (viewportWidth - w) / 2;
+      const total = currentSlideIndex * step + ml;
+      const x = centerOffset - total;
+      track.style.transform = `translateX(${x}px)`;
+      slides.forEach((s, i) =>
+        s.classList.toggle("active", i === currentSlideIndex)
+      );
       updateDots();
     }
 
     function createDots() {
       if (!dotsContainer) return;
       dotsContainer.innerHTML = "";
-      slides.forEach((_, index) => {
+      slides.forEach((_, i) => {
         const dot = document.createElement("button");
-        dot.classList.add("dot");
-        if (index === currentSlideIndex) {
-          dot.classList.add("active");
-        }
-        dot.setAttribute("aria-label", `Ga naar review ${index + 1}`);
+        dot.className = "dot";
+        dot.setAttribute("aria-label", `Ga naar review ${i + 1}`);
         dot.addEventListener("click", () => {
-          goToSlide(index);
-          restartAutoScroll();
+          goToSlide(i);
+          restartAuto();
         });
         dotsContainer.appendChild(dot);
       });
+      updateDots();
     }
     function updateDots() {
       if (!dotsContainer) return;
-      const dots = dotsContainer.children;
-      Array.from(dots).forEach((dot, index) => {
-        dot.classList.toggle("active", index === currentSlideIndex);
-      });
+      [...dotsContainer.children].forEach((d, i) =>
+        d.classList.toggle("active", i === currentSlideIndex)
+      );
     }
-    function goToSlide(slideIndex) {
-      currentSlideIndex = (slideIndex + slides.length) % slides.length;
+    function goToSlide(i) {
+      currentSlideIndex = (i + slides.length) % slides.length;
       updateSlidePosition();
     }
-    function nextSlide() {
+    function next() {
       goToSlide(currentSlideIndex + 1);
     }
-    function prevSlide() {
+    function prev() {
       goToSlide(currentSlideIndex - 1);
     }
-    function startAutoScroll() {
-      stopAutoScroll();
-      autoScrollInterval = setInterval(nextSlide, AUTOSCROLL_DELAY);
+    function startAuto() {
+      stopAuto();
+      autoScrollInterval = setInterval(next, AUTOSCROLL_DELAY);
     }
-    function stopAutoScroll() {
+    function stopAuto() {
       clearInterval(autoScrollInterval);
     }
-    function restartAutoScroll() {
-      stopAutoScroll();
-      startAutoScroll();
+    function restartAuto() {
+      stopAuto();
+      startAuto();
     }
 
-    if (nextButton) {
-      nextButton.addEventListener("click", () => {
-        nextSlide();
-        restartAutoScroll();
-      });
-    }
-    if (prevButton) {
-      prevButton.addEventListener("click", () => {
-        prevSlide();
-        restartAutoScroll();
-      });
-    }
-    if (carouselWrapper) {
-      carouselWrapper.addEventListener("mouseenter", stopAutoScroll);
-      carouselWrapper.addEventListener("mouseleave", startAutoScroll);
-      carouselWrapper.addEventListener("focusin", stopAutoScroll);
-      carouselWrapper.addEventListener("focusout", startAutoScroll);
-    }
+    nextButton?.addEventListener("click", () => {
+      next();
+      restartAuto();
+    });
+    prevButton?.addEventListener("click", () => {
+      prev();
+      restartAuto();
+    });
+
+    carouselWrapper?.addEventListener("mouseenter", stopAuto);
+    carouselWrapper?.addEventListener("mouseleave", startAuto);
+    carouselWrapper?.addEventListener("focusin", stopAuto);
+    carouselWrapper?.addEventListener("focusout", startAuto);
 
     createDots();
-    requestAnimationFrame(() => {
-      updateSlidePosition();
-    });
-    startAutoScroll();
+    requestAnimationFrame(updateSlidePosition);
+    startAuto();
 
     let resizeTimeout;
-    window.addEventListener("resize", () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        updateSlidePosition();
-      }, 250);
-    });
+    window.addEventListener(
+      "resize",
+      () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(updateSlidePosition, 200);
+      },
+      { passive: true }
+    );
   } else {
-    if (nextButton) nextButton.style.display = "none";
-    if (prevButton) prevButton.style.display = "none";
-    if (dotsContainer) dotsContainer.style.display = "none";
+    nextButton && (nextButton.style.display = "none");
+    prevButton && (prevButton.style.display = "none");
+    dotsContainer && (dotsContainer.style.display = "none");
   }
 
-  // --- Modal Functionaliteit ---
+  // ===== Modals (ESC + klik buiten + inline close) =====
   const openModalButtons = document.querySelectorAll(".open-modal-btn");
   const closeModalButtons = document.querySelectorAll(".close-modal-btn");
   const closeModalInlineButtons = document.querySelectorAll(
@@ -211,64 +209,44 @@ document.addEventListener("DOMContentLoaded", function () {
   const modals = document.querySelectorAll(".modal");
 
   function openModal(modal) {
-    if (modal == null) return;
+    if (!modal) return;
     modal.classList.add("active");
     document.body.style.overflow = "hidden";
-    const focusableElement = modal.querySelector(".close-modal-btn");
-    if (focusableElement) {
-      focusableElement.focus();
-    }
+    const focusEl = modal.querySelector(".close-modal-btn");
+    focusEl?.focus();
   }
-
   function closeModal(modal) {
-    if (modal == null) return;
+    if (!modal) return;
     modal.classList.remove("active");
     document.body.style.overflow = "auto";
   }
 
-  if (openModalButtons.length > 0) {
-    openModalButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const modal = document.querySelector(button.dataset.modalTarget);
-        openModal(modal);
-      });
+  openModalButtons.forEach((btn) => {
+    btn.addEventListener("click", () =>
+      openModal(document.querySelector(btn.dataset.modalTarget))
+    );
+  });
+  closeModalButtons.forEach((btn) => {
+    btn.addEventListener("click", () => closeModal(btn.closest(".modal")));
+  });
+  closeModalInlineButtons.forEach((btn) => {
+    btn.addEventListener("click", () => closeModal(btn.closest(".modal")));
+  });
+  modals.forEach((m) => {
+    m.addEventListener("click", (e) => {
+      if (e.target === m) closeModal(m);
     });
-  }
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      document.querySelectorAll(".modal.active").forEach(closeModal);
+    }
+  });
 
-  if (closeModalButtons.length > 0) {
-    closeModalButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const modal = button.closest(".modal");
-        closeModal(modal);
-      });
-    });
-  }
-
-  if (closeModalInlineButtons.length > 0) {
-    closeModalInlineButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const modal = button.closest(".modal");
-        closeModal(modal);
-      });
-    });
-  }
-
-  if (modals.length > 0) {
-    modals.forEach((modal) => {
-      modal.addEventListener("click", (e) => {
-        if (e.target === modal) {
-          closeModal(modal);
-        }
-      });
-    });
-  }
-
-  // --- Scroll Animaties voor Secties ---
-  const scrollAnimatedElements =
-    document.querySelectorAll(".animate-on-scroll");
-
-  if (scrollAnimatedElements.length > 0) {
-    const observer = new IntersectionObserver(
+  // ===== Scroll animaties =====
+  const toReveal = document.querySelectorAll(".animate-on-scroll");
+  if (toReveal.length) {
+    const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -278,13 +256,8 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         });
       },
-      {
-        threshold: 0.1,
-      }
+      { threshold: 0.1 }
     );
-
-    scrollAnimatedElements.forEach((el) => {
-      observer.observe(el);
-    });
+    toReveal.forEach((el) => io.observe(el));
   }
 });
