@@ -66,6 +66,8 @@ a {
     /* Volledige schermhoogte (minus navbar) en geen extra padding die bleeding veroorzaakt */
     padding: 0;
     min-height: calc(100vh - var(--navbar-height));
+    /* betere mobiele viewport-eenheid indien ondersteund */
+    min-height: calc(100svh - var(--navbar-height));
     display: grid;
     place-items: center;
 }
@@ -268,7 +270,7 @@ p {
     inset: 0;
     z-index: 0;
     /* iets sterkere overlay voor leesbaarheid */
-    background-image: linear-gradient(rgba(30, 26, 24, 0.62), rgba(30, 26, 24, 0.62)), url('images/IMG_8026.jpeg');
+    background-image: linear-gradient(rgba(30, 26, 24, 0.62), rgba(30, 26, 24, 0.62)), url('images/unnamed (1).jpg');
     background-size: cover;
     /* focus iets meer naar rechts en iets hoger voor betere compositie */
     background-position: 72% 28%;
@@ -284,7 +286,8 @@ p {
     max-width: 900px;
     padding: clamp(24px, 3vw, 40px) clamp(18px, 3vw, 34px);
     /* lichte, beige glaslaag die bij het palet past */
-    background: rgba(240, 234, 228, 0.16); /* var(--accent-beige-light) met transparantie */
+    background: rgba(240, 234, 228, 0.16);
+    /* var(--accent-beige-light) met transparantie */
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
     border-radius: 14px;
@@ -311,6 +314,9 @@ p {
 .hero-section p {
     color: #F0EAE4; /* var(--accent-beige-light) */
     font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.25rem);
+    margin: 0 auto 2.5rem;
+    font-weight: 300;
+    max-width: 700px;
 }
 
 .hero-section .btn-primary {
@@ -327,6 +333,7 @@ p {
         transform: scale(1.04);
         background-position: 68% 32%;
     }
+
     100% {
         transform: scale(1.10);
         background-position: 78% 26%;
@@ -334,13 +341,6 @@ p {
 }
 
 /* oude gradient animatie verwijderd voor performance en rust in de hero */
-
-.hero-section p {
-    font-size: 1.25rem;
-    margin: 0 auto 2.5rem;
-    font-weight: 300;
-    max-width: 700px
-}
 
 /* ===== Buttons ===== */
 .btn {
@@ -961,15 +961,18 @@ footer {
 }
 
 @media (max-width: 768px) {
+
     /* Meer contrast en iets hoger focuspunt van de achtergrond op kleinere schermen */
     .hero-section::before {
-    background-image: linear-gradient(rgba(30, 26, 24, 0.68), rgba(30, 26, 24, 0.68)), url('images/IMG_8026.jpeg');
-    background-position: 80% 22%;
+    background-image: linear-gradient(rgba(30, 26, 24, 0.68), rgba(30, 26, 24, 0.68)), url('images/unnamed (1).jpg');
+    background-position: 82% 24%;
     }
 
     .hero-section .container {
-        padding: 22px 18px;
-        border-radius: 12px;
+    padding: 22px 18px;
+    border-radius: 12px;
+    background: rgba(240, 234, 228, 0.22);
+    border-color: rgba(240, 234, 228, 0.45);
     }
 
     h2 {
@@ -1090,6 +1093,7 @@ footer {
     .hero-section {
         background: var(--bg-section-light)
     }
+
     .hero-section::before {
         animation: none !important;
     }
