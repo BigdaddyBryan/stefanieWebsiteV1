@@ -322,7 +322,8 @@ p {
 }
 
 .btn:focus-visible {
-    outline: 3px solid color-mix(in srgb, var(--accent-beige-dark), #000 10%)
+    outline: 3px solid color-mix(in srgb, var(--accent-beige-dark), #000 10%);
+    outline-offset: 2px
 }
 
 /* ===== Content ===== */
@@ -911,7 +912,8 @@ footer {
         background: var(--bg-main);
         box-shadow: 0 3px 5px rgba(0, 0, 0, .1);
         padding: 1rem 0;
-        border-top: 1px solid var(--border-color)
+        border-top: 1px solid var(--border-color);
+        z-index: 1000
     }
 
     .nav-links.active {
@@ -1009,5 +1011,9 @@ footer {
         animation: none !important;
         transition: none !important;
         scroll-behavior: auto !important
+    }
+
+    .hero-section {
+        background: var(--bg-section-light)
     }
 }

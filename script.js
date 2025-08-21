@@ -66,6 +66,13 @@ document.addEventListener("DOMContentLoaded", () => {
         "aria-label",
         isOpen ? "Sluit hoofdmenu" : "Open hoofdmenu"
       );
+      navLinksContainer.setAttribute("aria-hidden", String(!isOpen));
+      if (isOpen) {
+        // move focus to first link for keyboard users
+        navLinksContainer.querySelector("a.nav-link")?.focus();
+      } else {
+        hamburger.focus();
+      }
     };
     hamburger.addEventListener("click", toggleNav);
 
@@ -118,9 +125,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const total = currentSlideIndex * step + ml;
       const x = centerOffset - total;
       track.style.transform = `translateX(${x}px)`;
-      slides.forEach((s, i) =>
-        s.classList.toggle("active", i === currentSlideIndex)
-      );
+      slides.forEach((s, i) => {
+        const isActive = i === currentSlideIndex;
+        s.classList.toggle("active", isActive);
+        s.setAttribute("aria-hidden", String(!isActive));
+      });
       updateDots();
     }
 
@@ -207,18 +216,27 @@ document.addEventListener("DOMContentLoaded", () => {
     ".close-modal-inline-btn"
   );
   const modals = document.querySelectorAll(".modal");
+  let pageScrollTop = 0;
 
   function openModal(modal) {
     if (!modal) return;
     modal.classList.add("active");
-    document.body.style.overflow = "hidden";
+    // prevent body jump when scrollbars hide
+    pageScrollTop = window.scrollY;
+    document.body.style.top = `-${pageScrollTop}px`;
+    document.body.style.position = "fixed";
+    document.body.style.width = "100%";
     const focusEl = modal.querySelector(".close-modal-btn");
     focusEl?.focus();
+    trapFocus(modal);
   }
   function closeModal(modal) {
     if (!modal) return;
     modal.classList.remove("active");
-    document.body.style.overflow = "auto";
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.width = "";
+    window.scrollTo(0, pageScrollTop);
   }
 
   openModalButtons.forEach((btn) => {
@@ -242,6 +260,27 @@ document.addEventListener("DOMContentLoaded", () => {
       document.querySelectorAll(".modal.active").forEach(closeModal);
     }
   });
+
+  // basic focus trap for modals
+  function trapFocus(root) {
+    const focusable = root.querySelectorAll(
+      'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+    );
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    function handle(e) {
+      if (e.key !== "Tab") return;
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+    root.addEventListener("keydown", handle);
+  }
 
   // ===== Scroll animaties =====
   const toReveal = document.querySelectorAll(".animate-on-scroll");

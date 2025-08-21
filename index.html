@@ -8,9 +8,12 @@
       name="description"
       content="Lifestyle coaching en energetische therapie voor meer energie, balans en harmonie."
     />
+    <meta name="theme-color" content="#3C3633" />
     <link rel="stylesheet" href="style.css" />
 
     <!-- Montserrat (blijft zoals je had) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
@@ -23,6 +26,37 @@
 
     <!-- Favicon optioneel -->
     <link rel="icon" href="images/favicon.ico" />
+
+    <!-- Open Graph / Social sharing -->
+    <meta property="og:title" content="Stefanie Bergshoeff - Kracht & Balans" />
+    <meta
+      property="og:description"
+      content="Lifestyle coaching en energetische therapie voor meer energie, balans en harmonie."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="images/IMG_7947-scaled.jpeg" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Stefanie Bergshoeff",
+        "description": "Lifestyle coaching en energetische therapie voor een leven vol energie en harmonie.",
+        "image": "images/IMG_7947-scaled.jpeg",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Voorbeeldstraat 123",
+          "postalCode": "1234 AB",
+          "addressLocality": "Plaatsnaam",
+          "addressCountry": "NL"
+        },
+        "email": "info@stefaniebergshoeff.nl",
+        "areaServed": "NL",
+        "sameAs": []
+      }
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main">Direct naar inhoud</a>
@@ -41,7 +75,7 @@
             <span></span><span></span><span></span>
           </button>
 
-          <ul id="site-nav" class="nav-links">
+          <ul id="site-nav" class="nav-links" aria-hidden="false">
             <li><a href="#hero" class="nav-link">Home</a></li>
             <li><a href="#over-mij" class="nav-link">Over Mij</a></li>
             <li><a href="#werkwijze" class="nav-link">Werkwijze</a></li>
@@ -366,13 +400,18 @@
           role="region"
           aria-roledescription="carousel"
           aria-label="Reviews"
+          aria-live="polite"
         >
           <h2>Wat mensen zeggen.</h2>
 
           <div class="testimonial-carousel-wrapper">
             <div class="testimonial-carousel">
-              <div class="testimonial-track">
-                <div class="testimonial-slide">
+              <div class="testimonial-track" role="list">
+                <div
+                  class="testimonial-slide"
+                  role="listitem"
+                  aria-hidden="false"
+                >
                   <div class="testimonial-content">
                     <p>
                       "Dankzij Stefanie heb ik grote stappen kunnen zetten in
@@ -381,7 +420,11 @@
                     <h4>- Anna V.</h4>
                   </div>
                 </div>
-                <div class="testimonial-slide">
+                <div
+                  class="testimonial-slide"
+                  role="listitem"
+                  aria-hidden="true"
+                >
                   <div class="testimonial-content">
                     <p>
                       "De coaching gaf me rust en balans in een stressvolle
@@ -390,7 +433,11 @@
                     <h4>- Mark S.</h4>
                   </div>
                 </div>
-                <div class="testimonial-slide">
+                <div
+                  class="testimonial-slide"
+                  role="listitem"
+                  aria-hidden="true"
+                >
                   <div class="testimonial-content">
                     <p>
                       "Ik voel me energieker en meer in balans sinds ik bij
@@ -399,7 +446,11 @@
                     <h4>- Linda K.</h4>
                   </div>
                 </div>
-                <div class="testimonial-slide">
+                <div
+                  class="testimonial-slide"
+                  role="listitem"
+                  aria-hidden="true"
+                >
                   <div class="testimonial-content">
                     <p>
                       "Een integere coach; luistert echt en helpt je vooruit."
