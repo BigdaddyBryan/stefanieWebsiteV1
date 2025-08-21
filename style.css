@@ -881,7 +881,8 @@ p {
 footer {
     background: var(--brand-dark);
     color: var(--bg-section-light);
-    padding: 50px 0 0
+    padding: 50px 0 0;
+    font-size: 0.95rem;
 }
 
 .footer-container {
@@ -892,7 +893,7 @@ footer {
 }
 
 .footer-col h4 {
-    font-size: 1.1rem;
+    font-size: inherit;
     margin-bottom: 1.25rem;
     font-weight: 600;
     color: var(--text-light);
@@ -911,7 +912,7 @@ footer {
 }
 
 .footer-col p {
-    font-size: .9rem;
+    font-size: inherit;
     line-height: 1.7;
     color: #ccc
 }
@@ -959,7 +960,7 @@ footer {
     border-top: 1px solid rgba(255, 255, 255, .1);
     text-align: center;
     padding: 20px 0;
-    font-size: .85rem;
+    font-size: inherit;
     color: #aaa
 }
 
@@ -1098,6 +1099,11 @@ footer {
     #over-mij .image-content img:first-child,
     #over-mij .image-content img:last-child {
         transform: none
+    }
+
+    /* Show only one photo on mobile: hide the first (IMG_7947) */
+    #over-mij .image-content img:first-child {
+        display: none;
     }
 
     .testimonial-slide {
