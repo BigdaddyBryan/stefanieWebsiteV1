@@ -311,7 +311,14 @@ document.addEventListener("DOMContentLoaded", () => {
         // force reflow to allow transition
         // eslint-disable-next-line no-unused-expressions
         aboutMore.offsetHeight;
+        // add a short-lived class to trigger subtle glow
+        aboutMore.classList.add("opening");
         aboutMore.classList.add("is-open");
+        const removeOpening = () => {
+          aboutMore.classList.remove("opening");
+          aboutMore.removeEventListener("transitionend", removeOpening);
+        };
+        aboutMore.addEventListener("transitionend", removeOpening);
       } else {
         aboutMore.classList.remove("is-open");
         const onEnd = (e) => {
