@@ -39,7 +39,8 @@ body {
     scroll-margin-top: calc(var(--navbar-height) + 16px)
 }
 
-img {
+img,
+video {
     max-width: 100%;
     height: auto;
     display: block;
@@ -63,10 +64,8 @@ a {
 }
 
 #hero.section-padding {
-    /* Volledige schermhoogte (minus navbar) en geen extra padding die bleeding veroorzaakt */
     padding: 0;
     min-height: calc(100vh - var(--navbar-height));
-    /* betere mobiele viewport-eenheid indien ondersteund */
     min-height: calc(100svh - var(--navbar-height));
     display: grid;
     place-items: center;
@@ -182,7 +181,6 @@ p {
 
 .collapsible-content>* {
     min-height: 0;
-    /* voor smooth collapse */
 }
 
 .collapsible-content.is-open {
@@ -190,7 +188,6 @@ p {
     opacity: 1;
 }
 
-/* Staggered content reveal inside the collapsible for a premium feel */
 .collapsible-content .about-sections>* {
     opacity: 0;
     transform: translateY(8px);
@@ -202,7 +199,6 @@ p {
     transform: translateY(0);
 }
 
-/* Gentle stagger delays only when opening */
 .collapsible-content.is-open .about-sections>*:nth-child(1) {
     transition-delay: .05s;
 }
@@ -235,7 +231,6 @@ p {
     transition-delay: .4s;
 }
 
-/* Subtle glow on open */
 .collapsible-content.opening .about-sections {
     animation: pulseBorder .6s ease-out;
 }
@@ -383,7 +378,7 @@ p {
     transition: .3s ease
 }
 
-/* ===== Hero met premium achtergrondfoto + overlay ===== */
+/* ===== Hero ===== */
 .hero-section {
     color: var(--text-light);
     display: flex;
@@ -392,7 +387,6 @@ p {
     text-align: center;
     position: relative;
     overflow: hidden;
-    /* overschrijf oude gradient/animatie */
     background: none;
     animation: none;
 }
@@ -402,13 +396,10 @@ p {
     position: absolute;
     inset: 0;
     z-index: 0;
-    /* iets sterkere overlay voor leesbaarheid */
     background-image: linear-gradient(rgba(30, 26, 24, 0.62), rgba(30, 26, 24, 0.62)), url('images/unnamed (1).jpg');
     background-size: cover;
-    /* focus iets meer naar rechts en iets hoger voor betere compositie */
     background-position: 72% 28%;
     background-repeat: no-repeat;
-    /* Subtiele Ken Burns animatie */
     animation: heroKenBurns 28s ease-in-out infinite alternate;
     will-change: transform, background-position;
 }
@@ -418,9 +409,7 @@ p {
     z-index: 1;
     max-width: 900px;
     padding: clamp(24px, 3vw, 40px) clamp(18px, 3vw, 34px);
-    /* lichte, beige glaslaag die bij het palet past */
     background: rgba(240, 234, 228, 0.16);
-    /* var(--accent-beige-light) met transparantie */
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
     border-radius: 14px;
@@ -446,7 +435,6 @@ p {
 
 .hero-section p {
     color: #F0EAE4;
-    /* var(--accent-beige-light) */
     font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.25rem);
     margin: 0 auto 2.5rem;
     font-weight: 300;
@@ -474,7 +462,6 @@ p {
     }
 }
 
-/* oude gradient animatie verwijderd voor performance en rust in de hero */
 
 /* ===== Buttons ===== */
 .btn {
@@ -566,7 +553,6 @@ p {
 /* Werkwijze Grid */
 .werkwijze-grid {
     display: grid;
-    /* For 3 items, explicitly set 3 columns on larger screens */
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     margin-top: 3rem;
@@ -635,7 +621,8 @@ p {
     margin-top: 3rem
 }
 
-.gallery-item img {
+.gallery-item img,
+.gallery-item video {
     width: 100%;
     height: 300px;
     object-fit: cover;
@@ -644,7 +631,8 @@ p {
     transition: transform .4s ease, box-shadow .4s ease
 }
 
-.gallery-item img:hover {
+.gallery-item img:hover,
+.gallery-item video:hover {
     transform: scale(1.05);
     box-shadow: 0 8px 25px rgba(0, 0, 0, .15)
 }
@@ -888,71 +876,6 @@ p {
     color: var(--accent-beige-dark)
 }
 
-/* Modals */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 2000;
-    inset: 0;
-    overflow: auto;
-    background: rgba(60, 54, 51, .7);
-    opacity: 0;
-    transition: opacity .35s ease;
-    padding-top: 50px
-}
-
-.modal.active {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 1
-}
-
-.modal-content {
-    background: var(--bg-main);
-    margin: auto;
-    padding: 30px 40px;
-    border-radius: 12px;
-    width: 90%;
-    max-width: 700px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
-    position: relative;
-    transform: scale(.96);
-    transition: transform .35s ease;
-    max-height: 85vh;
-    overflow-y: auto
-}
-
-.modal.active .modal-content {
-    transform: scale(1)
-}
-
-.modal-image {
-    width: 100%;
-    max-height: 250px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 1.5rem
-}
-
-.close-modal-btn {
-    color: var(--accent-beige-dark);
-    position: absolute;
-    top: 15px;
-    right: 25px;
-    font-size: 2.2rem;
-    font-weight: bold;
-    line-height: 1;
-    background: none;
-    border: 0;
-    cursor: pointer
-}
-
-.close-modal-btn:hover,
-.close-modal-btn:focus {
-    color: var(--brand-dark)
-}
-
 /* WhatsApp FAB */
 .whatsapp-fab {
     position: fixed;
@@ -1116,14 +1039,11 @@ footer {
     }
 
     .werkwijze-grid {
-        /* Adjust for tablets */
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     }
 }
 
 @media (max-width: 768px) {
-
-    /* Meer contrast en iets hoger focuspunt van de achtergrond op kleinere schermen */
     .hero-section::before {
         background-image: linear-gradient(rgba(30, 26, 24, 0.68), rgba(30, 26, 24, 0.68)), url('images/unnamed (1).jpg');
         background-position: 82% 24%;
@@ -1227,7 +1147,6 @@ footer {
     }
 
     .werkwijze-grid {
-        /* Stack on mobile */
         grid-template-columns: 1fr;
     }
 }

@@ -11,23 +11,19 @@
     <meta name="theme-color" content="#3C3633" />
     <link rel="stylesheet" href="style.css" />
 
-    <!-- Montserrat (blijft zoals je had) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <!-- Font Awesome (zoals in je repo) -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
 
-    <!-- Favicon optioneel -->
     <link rel="icon" href="images/favicon.ico" />
 
-    <!-- Open Graph / Social sharing -->
     <meta property="og:title" content="Stefanie Bergshoeff - Kracht & Balans" />
     <meta
       property="og:description"
@@ -37,7 +33,6 @@
     <meta property="og:image" content="images/IMG_7947-scaled.jpeg" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <!-- Structured data -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -89,7 +84,6 @@
     </header>
 
     <main id="main">
-      <!-- HERO (thema & gradient behouden) -->
       <section id="hero" class="hero-section section-padding">
         <div class="container">
           <h1 class="animate-on-load">
@@ -105,7 +99,6 @@
         </div>
       </section>
 
-      <!-- OVER MIJ (oude afbeeldingen blijven) -->
       <section
         id="over-mij"
         class="content-section bg-section-light section-padding animate-on-scroll"
@@ -231,7 +224,6 @@
         </div>
       </section>
 
-      <!-- WERKWIJZE -->
       <section
         id="werkwijze"
         class="content-section section-padding animate-on-scroll"
@@ -245,7 +237,6 @@
             helder pad, waarin jouw verhaal en doelen centraal staan.
           </p>
           <div class="werkwijze-grid">
-            <!-- Stap 1: Kennismaking -->
             <article class="werkwijze-card animate-on-scroll">
               <div class="werkwijze-step-number">1</div>
               <i class="fas fa-handshake werkwijze-icon" aria-hidden="true"></i>
@@ -259,7 +250,6 @@
               </p>
             </article>
 
-            <!-- Stap 2: Coaching Sessies -->
             <article
               class="werkwijze-card animate-on-scroll"
               data-animation-delay="0.2s"
@@ -276,7 +266,6 @@
               </p>
             </article>
 
-            <!-- Stap 3: Afronding & Evaluatie -->
             <article
               class="werkwijze-card animate-on-scroll"
               data-animation-delay="0.4s"
@@ -297,7 +286,6 @@
           </div>
         </div>
       </section>
-      <!-- PRAKTIJK (galerij) -->
       <section
         id="praktijk"
         class="content-section bg-section-light section-padding animate-on-scroll"
@@ -310,7 +298,7 @@
           <div class="gallery-grid">
             <figure class="gallery-item animate-on-scroll">
               <img
-                src="images/PHOTO-2025-05-22-14-38-56.jpg"
+                src="images/IMG_0083.jpeg"
                 alt="Overzicht van de praktijkruimte"
                 width="640"
                 height="420"
@@ -323,15 +311,20 @@
               class="gallery-item animate-on-scroll"
               data-animation-delay="0.2s"
             >
-              <img
-                src="images/PHOTO-2025-05-22-14-38-56 (1).jpg"
+              <video
+                src="images/img_0111.mp4"
                 alt="Detail van een zithoek in de praktijk"
                 width="640"
                 height="420"
+                loop
+                autoplay
+                muted
+                playsinline
                 decoding="async"
                 loading="lazy"
-                onerror="this.onerror=null;this.src='https://placehold.co/400x300/F9F6F2/3C3633?text=Praktijk+2';"
-              />
+              >
+                Je browser ondersteunt geen video's.
+              </video>
             </figure>
             <figure
               class="gallery-item animate-on-scroll"
@@ -351,7 +344,6 @@
         </div>
       </section>
 
-      <!-- REVIEWS (carousel behouden, toegankelijker) -->
       <section
         id="reviews"
         class="content-section section-padding animate-on-scroll"
@@ -414,11 +406,6 @@
                     <h4>- Esmee A.</h4>
                   </div>
                 </div>
-                <div
-                  class="testimonial-slide"
-                  role="listitem"
-                  aria-hidden="true"
-                ></div>
               </div>
             </div>
             <button class="carousel-btn prev" aria-label="Vorige review">
@@ -432,7 +419,6 @@
         </div>
       </section>
 
-      <!-- TARIEVEN -->
       <section
         id="tarieven"
         class="content-section bg-section-light section-padding animate-on-scroll"
@@ -487,7 +473,6 @@
         </div>
       </section>
 
-      <!-- CONTACT -->
       <section
         id="contact"
         class="content-section section-padding animate-on-scroll"

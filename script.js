@@ -68,7 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
       );
       navLinksContainer.setAttribute("aria-hidden", String(!isOpen));
       if (isOpen) {
-        // move focus to first link for keyboard users
         navLinksContainer.querySelector("a.nav-link")?.focus();
       } else {
         hamburger.focus();
@@ -104,7 +103,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const prevButton = document.querySelector(".carousel-btn.prev");
   const dotsContainer = document.querySelector(".carousel-dots");
 
-  if (track && track.children.length > 0) {
+  if (track && track.children.length > 1) {
+    // Only init if more than one slide
     const slides = Array.from(track.children);
     let currentSlideIndex = 0;
     let autoScrollInterval;
@@ -209,89 +209,17 @@ document.addEventListener("DOMContentLoaded", () => {
     dotsContainer && (dotsContainer.style.display = "none");
   }
 
-  // ===== Modals (ESC + klik buiten + inline close) =====
-  const openModalButtons = document.querySelectorAll(".open-modal-btn");
-  const closeModalButtons = document.querySelectorAll(".close-modal-btn");
-  const closeModalInlineButtons = document.querySelectorAll(
-    ".close-modal-inline-btn"
-  );
-  const modals = document.querySelectorAll(".modal");
-  let pageScrollTop = 0;
-
-  function openModal(modal) {
-    if (!modal) return;
-    modal.classList.add("active");
-    // prevent body jump when scrollbars hide
-    pageScrollTop = window.scrollY;
-    document.body.style.top = `-${pageScrollTop}px`;
-    document.body.style.position = "fixed";
-    document.body.style.width = "100%";
-    const focusEl = modal.querySelector(".close-modal-btn");
-    focusEl?.focus();
-    trapFocus(modal);
-  }
-  function closeModal(modal) {
-    if (!modal) return;
-    modal.classList.remove("active");
-    document.body.style.position = "";
-    document.body.style.top = "";
-    document.body.style.width = "";
-    window.scrollTo(0, pageScrollTop);
-  }
-
-  openModalButtons.forEach((btn) => {
-    btn.addEventListener("click", () =>
-      openModal(document.querySelector(btn.dataset.modalTarget))
-    );
-  });
-  closeModalButtons.forEach((btn) => {
-    btn.addEventListener("click", () => closeModal(btn.closest(".modal")));
-  });
-  closeModalInlineButtons.forEach((btn) => {
-    btn.addEventListener("click", () => closeModal(btn.closest(".modal")));
-  });
-  modals.forEach((m) => {
-    m.addEventListener("click", (e) => {
-      if (e.target === m) closeModal(m);
-    });
-  });
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      document.querySelectorAll(".modal.active").forEach(closeModal);
-    }
-  });
-
-  // basic focus trap for modals
-  function trapFocus(root) {
-    const focusable = root.querySelectorAll(
-      'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
-    );
-    if (!focusable.length) return;
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-    function handle(e) {
-      if (e.key !== "Tab") return;
-      if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault();
-        first.focus();
-      }
-    }
-    root.addEventListener("keydown", handle);
-  }
-
   // ===== Scroll animaties =====
   const toReveal = document.querySelectorAll(".animate-on-scroll");
   if (toReveal.length) {
     const io = new IntersectionObserver(
-      (entries) => {
+      (entries, observer) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const delay = entry.target.dataset.animationDelay || "0s";
             entry.target.style.transitionDelay = delay;
             entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
           }
         });
       },
@@ -308,17 +236,15 @@ document.addEventListener("DOMContentLoaded", () => {
       aboutToggle.setAttribute("aria-expanded", String(open));
       if (open) {
         aboutMore.hidden = false;
-        // force reflow to allow transition
-        // eslint-disable-next-line no-unused-expressions
-        aboutMore.offsetHeight;
-        // add a short-lived class to trigger subtle glow
-        aboutMore.classList.add("opening");
-        aboutMore.classList.add("is-open");
-        const removeOpening = () => {
-          aboutMore.classList.remove("opening");
-          aboutMore.removeEventListener("transitionend", removeOpening);
-        };
-        aboutMore.addEventListener("transitionend", removeOpening);
+        requestAnimationFrame(() => {
+          aboutMore.classList.add("opening");
+          aboutMore.classList.add("is-open");
+          const removeOpening = () => {
+            aboutMore.classList.remove("opening");
+            aboutMore.removeEventListener("transitionend", removeOpening);
+          };
+          aboutMore.addEventListener("transitionend", removeOpening);
+        });
       } else {
         aboutMore.classList.remove("is-open");
         const onEnd = (e) => {
