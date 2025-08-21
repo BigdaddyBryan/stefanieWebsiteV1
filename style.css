@@ -63,8 +63,11 @@ a {
 }
 
 #hero.section-padding {
-    padding-top: 20px;
-    min-height: calc(90vh - var(--navbar-height))
+    /* Volledige schermhoogte (minus navbar) en geen extra padding die bleeding veroorzaakt */
+    padding: 0;
+    min-height: calc(100vh - var(--navbar-height));
+    display: grid;
+    place-items: center;
 }
 
 h1,
@@ -245,32 +248,92 @@ p {
     transition: .3s ease
 }
 
-/* ===== Hero (gradient zoals je had) ===== */
+/* ===== Hero met premium achtergrondfoto + overlay ===== */
 .hero-section {
-    color: var(--brand-dark);
+    color: var(--text-light);
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: linear-gradient(-45deg, var(--bg-section-medium), var(--accent-beige-light), var(--bg-section-light), var(--bg-section-medium));
-    background-size: 400% 400%;
-    animation: gradientBG 25s ease infinite;
-    overflow: hidden
+    position: relative;
+    overflow: hidden;
+    /* overschrijf oude gradient/animatie */
+    background: none;
+    animation: none;
 }
 
-@keyframes gradientBG {
+.hero-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    /* iets sterkere overlay voor leesbaarheid */
+    background-image: linear-gradient(rgba(30, 26, 24, 0.62), rgba(30, 26, 24, 0.62)), url('images/IMG_8026.jpeg');
+    background-size: cover;
+    /* focus iets meer naar rechts en iets hoger voor betere compositie */
+    background-position: 72% 28%;
+    background-repeat: no-repeat;
+    /* Subtiele Ken Burns animatie */
+    animation: heroKenBurns 28s ease-in-out infinite alternate;
+    will-change: transform, background-position;
+}
+
+.hero-section .container {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    padding: clamp(24px, 3vw, 40px) clamp(18px, 3vw, 34px);
+    /* lichte, beige glaslaag die bij het palet past */
+    background: rgba(240, 234, 228, 0.16); /* var(--accent-beige-light) met transparantie */
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    border-radius: 14px;
+    border: 1px solid rgba(240, 234, 228, 0.35);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
+    display: grid;
+    gap: clamp(12px, 2.6vh, 22px);
+    justify-items: center;
+}
+
+.hero-section h1,
+.hero-section p {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.hero-section h1 {
+    color: #FFFFFF;
+    font-size: clamp(2.6rem, 2rem + 2.4vw, 3.6rem);
+    line-height: 1.15;
+    letter-spacing: 0.2px;
+    font-weight: 700;
+}
+
+.hero-section p {
+    color: #F0EAE4; /* var(--accent-beige-light) */
+    font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.25rem);
+}
+
+.hero-section .btn-primary {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.30);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.hero-section .btn-primary:hover {
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.35);
+}
+
+@keyframes heroKenBurns {
     0% {
-        background-position: 0% 50%
+        transform: scale(1.04);
+        background-position: 68% 32%;
     }
-
-    50% {
-        background-position: 100% 50%
-    }
-
     100% {
-        background-position: 0% 50%
+        transform: scale(1.10);
+        background-position: 78% 26%;
     }
 }
+
+/* oude gradient animatie verwijderd voor performance en rust in de hero */
 
 .hero-section p {
     font-size: 1.25rem;
@@ -898,6 +961,17 @@ footer {
 }
 
 @media (max-width: 768px) {
+    /* Meer contrast en iets hoger focuspunt van de achtergrond op kleinere schermen */
+    .hero-section::before {
+    background-image: linear-gradient(rgba(30, 26, 24, 0.68), rgba(30, 26, 24, 0.68)), url('images/IMG_8026.jpeg');
+    background-position: 80% 22%;
+    }
+
+    .hero-section .container {
+        padding: 22px 18px;
+        border-radius: 12px;
+    }
+
     h2 {
         font-size: 1.8rem
     }
@@ -1015,5 +1089,8 @@ footer {
 
     .hero-section {
         background: var(--bg-section-light)
+    }
+    .hero-section::before {
+        animation: none !important;
     }
 }
