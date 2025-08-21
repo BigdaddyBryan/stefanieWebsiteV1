@@ -312,7 +312,8 @@ p {
 }
 
 .hero-section p {
-    color: #F0EAE4; /* var(--accent-beige-light) */
+    color: #F0EAE4;
+    /* var(--accent-beige-light) */
     font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.25rem);
     margin: 0 auto 2.5rem;
     font-weight: 300;
@@ -964,15 +965,15 @@ footer {
 
     /* Meer contrast en iets hoger focuspunt van de achtergrond op kleinere schermen */
     .hero-section::before {
-    background-image: linear-gradient(rgba(30, 26, 24, 0.68), rgba(30, 26, 24, 0.68)), url('images/unnamed (1).jpg');
-    background-position: 82% 24%;
+        background-image: linear-gradient(rgba(30, 26, 24, 0.68), rgba(30, 26, 24, 0.68)), url('images/unnamed (1).jpg');
+        background-position: 82% 24%;
     }
 
     .hero-section .container {
-    padding: 22px 18px;
-    border-radius: 12px;
-    background: rgba(240, 234, 228, 0.22);
-    border-color: rgba(240, 234, 228, 0.45);
+        padding: 22px 18px;
+        border-radius: 12px;
+        background: rgba(240, 234, 228, 0.22);
+        border-color: rgba(240, 234, 228, 0.45);
     }
 
     h2 {
