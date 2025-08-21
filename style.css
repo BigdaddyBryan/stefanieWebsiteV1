@@ -378,30 +378,20 @@ p {
     transition: .3s ease
 }
 
-/* ===== Hero ===== */
+/* ===== Hero (clean & simple, no background image) ===== */
 .hero-section {
-    color: var(--text-light);
+    color: var(--brand-dark);
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     position: relative;
     overflow: hidden;
-    background: none;
-    animation: none;
+    background: var(--accent-beige-light);
 }
 
 .hero-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background-image: linear-gradient(rgba(30, 26, 24, 0.62), rgba(30, 26, 24, 0.62)), url('images/unnamed (1).jpg');
-    background-size: cover;
-    background-position: 72% 28%;
-    background-repeat: no-repeat;
-    animation: heroKenBurns 28s ease-in-out infinite alternate;
-    will-change: transform, background-position;
+    content: none;
 }
 
 .hero-section .container {
@@ -409,58 +399,45 @@ p {
     z-index: 1;
     max-width: 900px;
     padding: clamp(24px, 3vw, 40px) clamp(18px, 3vw, 34px);
-    background: rgba(240, 234, 228, 0.16);
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
-    border-radius: 14px;
-    border: 1px solid rgba(240, 234, 228, 0.35);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
     display: grid;
     gap: clamp(12px, 2.6vh, 22px);
     justify-items: center;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
 }
 
 .hero-section h1,
 .hero-section p {
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    text-shadow: none;
 }
 
 .hero-section h1 {
-    color: #FFFFFF;
-    font-size: clamp(2.6rem, 2rem + 2.4vw, 3.6rem);
-    line-height: 1.15;
-    letter-spacing: 0.2px;
+    color: var(--brand-dark);
+    font-size: clamp(2.4rem, 1.8rem + 2.2vw, 3.2rem);
+    line-height: 1.2;
+    letter-spacing: 0.1px;
     font-weight: 700;
 }
 
 .hero-section p {
-    color: #F0EAE4;
-    font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.25rem);
-    margin: 0 auto 2.5rem;
+    color: #555;
+    font-size: clamp(1rem, 0.95rem + 0.3vw, 1.2rem);
+    margin: 0 auto 2rem;
     font-weight: 300;
     max-width: 700px;
 }
 
 .hero-section .btn-primary {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.30);
-    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: none;
+    border-color: var(--brand-dark);
 }
 
 .hero-section .btn-primary:hover {
-    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.35);
+    box-shadow: none;
 }
 
-@keyframes heroKenBurns {
-    0% {
-        transform: scale(1.04);
-        background-position: 68% 32%;
-    }
-
-    100% {
-        transform: scale(1.10);
-        background-position: 78% 26%;
-    }
-}
+/* Ken Burns animation removed (no image) */
 
 
 /* ===== Buttons ===== */
@@ -1044,16 +1021,9 @@ footer {
 }
 
 @media (max-width: 768px) {
-    .hero-section::before {
-        background-image: linear-gradient(rgba(30, 26, 24, 0.68), rgba(30, 26, 24, 0.68)), url('images/unnamed (1).jpg');
-        background-position: 82% 24%;
-    }
-
     .hero-section .container {
         padding: 22px 18px;
         border-radius: 12px;
-        background: rgba(240, 234, 228, 0.22);
-        border-color: rgba(240, 234, 228, 0.45);
     }
 
     h2 {
@@ -1176,7 +1146,7 @@ footer {
     }
 
     .hero-section {
-        background: var(--bg-section-light)
+        background: var(--accent-beige-light)
     }
 
     .hero-section::before {
