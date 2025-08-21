@@ -299,4 +299,33 @@ document.addEventListener("DOMContentLoaded", () => {
     );
     toReveal.forEach((el) => io.observe(el));
   }
+
+  // ===== Over Mij: Collapsible toggle =====
+  const aboutToggle = document.getElementById("about-toggle");
+  const aboutMore = document.getElementById("about-more");
+  if (aboutToggle && aboutMore) {
+    const setOpen = (open) => {
+      aboutToggle.setAttribute("aria-expanded", String(open));
+      if (open) {
+        aboutMore.hidden = false;
+        // force reflow to allow transition
+        // eslint-disable-next-line no-unused-expressions
+        aboutMore.offsetHeight;
+        aboutMore.classList.add("is-open");
+      } else {
+        aboutMore.classList.remove("is-open");
+        const onEnd = (e) => {
+          if (e.propertyName === "grid-template-rows") {
+            aboutMore.hidden = true;
+            aboutMore.removeEventListener("transitionend", onEnd);
+          }
+        };
+        aboutMore.addEventListener("transitionend", onEnd);
+      }
+    };
+    aboutToggle.addEventListener("click", () => {
+      const open = aboutToggle.getAttribute("aria-expanded") === "true";
+      setOpen(!open);
+    });
+  }
 });

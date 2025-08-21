@@ -130,6 +130,75 @@ p {
     font-size: .95rem
 }
 
+.about-sections a {
+    color: var(--accent-beige-dark);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: from-font;
+    text-decoration-color: color-mix(in srgb, var(--accent-beige-dark), #000 15%);
+    transition: color .25s ease, text-decoration-color .25s ease, background-color .25s ease;
+    border-radius: 4px;
+    padding: 0 1px;
+}
+
+.about-sections a:hover {
+    color: var(--brand-dark);
+    text-decoration-color: currentColor;
+}
+
+.about-sections a:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--accent-beige-dark), #000 22%);
+    outline-offset: 2px;
+    background: rgba(240, 234, 228, 0.35);
+}
+
+/* ===== Over Mij: Collapsible ===== */
+.about-collapsible {
+    margin-top: 1rem;
+}
+
+.collapsible-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.collapsible-toggle .chevron {
+    transition: transform .3s ease;
+}
+
+.collapsible-toggle[aria-expanded="true"] .chevron {
+    transform: rotate(180deg);
+}
+
+.collapsible-content {
+    overflow: hidden;
+    transition: grid-template-rows .4s ease, opacity .35s ease;
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    margin-top: 1rem;
+}
+
+.collapsible-content>* {
+    min-height: 0;
+    /* voor smooth collapse */
+}
+
+.collapsible-content.is-open {
+    grid-template-rows: 1fr;
+    opacity: 1;
+}
+
+.about-sections h3 {
+    font-size: 1.1rem;
+    margin: 1rem 0 .5rem;
+}
+
+.about-sections p+p {
+    margin-top: .5rem;
+}
+
 /* ===== Skip link ===== */
 .skip-link {
     position: absolute;
