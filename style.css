@@ -131,7 +131,8 @@ p {
 
 .section-wide-image img {
     width: 100%;
-    height: auto; /* show full image scale, no cropping */
+    height: auto;
+    /* show full image scale, no cropping */
     border-radius: 12px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 }
@@ -524,7 +525,7 @@ p {
 #over-mij .flex-container {
     display: flex;
     align-items: center;
-    gap: 3rem
+    gap: 3rem;
 }
 
 #over-mij .text-content {
@@ -1057,6 +1058,13 @@ footer {
 
     h2 {
         font-size: 1.8rem
+    }
+
+
+    #over-mij .flex-container {
+        display: flex;
+        align-items: center;
+        gap: 0rem;
     }
 
     .nav-links {
