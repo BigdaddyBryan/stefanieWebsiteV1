@@ -124,20 +124,37 @@ p {
 }
 
 /* Full-width image between intro and content */
-.section-wide-image {
-    max-width: 760px;
-    margin: 0 auto 2rem;
+/* Werkwijze: intro layout (image left, text right) */
+.werkwijze-intro {
+    display: grid;
+    grid-template-columns: 1.05fr 1.2fr;
+    grid-template-areas: "media text";
+    gap: 2rem;
+    align-items: center;
+    margin: 0 auto 2.25rem;
+    max-width: 1000px;
 }
 
-.section-wide-image img {
+.werkwijze-intro-media {
+    grid-area: media;
+}
+
+.werkwijze-intro-text {
+    grid-area: text;
+}
+
+.werkwijze-intro-media img {
     width: 100%;
     height: auto;
-    /* show full image scale, no cropping */
     border-radius: 12px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 }
 
-/* Remove extra constraints to avoid any stretching; intrinsic ratio preserved */
+.werkwijze-intro-text .section-intro-text {
+    margin: 0;
+    text-align: left;
+    max-width: none;
+}
 
 .section-outro-text {
     margin-top: 2.5rem;
@@ -1205,6 +1222,20 @@ footer {
 
     .werkwijze-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* Stack Werkwijze intro on mobile */
+    .werkwijze-intro {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "text"
+            "media";
+        gap: 1.25rem;
+        max-width: 680px;
+    }
+
+    .werkwijze-intro-text .section-intro-text {
+        text-align: center;
     }
 }
 
