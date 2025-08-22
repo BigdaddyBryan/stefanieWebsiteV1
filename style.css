@@ -993,6 +993,46 @@ footer {
     color: #aaa
 }
 
+/* Footer legal links: subtle animated underline + focus visibility */
+.footer-bottom a {
+    color: var(--accent-beige-light);
+    position: relative;
+    text-decoration: none;
+    padding-bottom: 1px;
+    letter-spacing: 0.1px;
+    transition: color .28s cubic-bezier(.2, .8, .2, 1);
+}
+
+.footer-bottom a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    /* slankere underline */
+    width: 100%;
+    background: currentColor;
+    /* beige door currentColor */
+    transform: scaleX(0);
+    transform-origin: 50% 50%;
+    transition: transform .35s cubic-bezier(.2, .8, .2, 1);
+    opacity: .95;
+}
+
+.footer-bottom a:hover {
+    color: var(--accent-beige-dark);
+    /* premium contrast on hover */
+}
+
+.footer-bottom a:hover::after {
+    transform: scaleX(1);
+}
+
+.footer-bottom a:focus-visible {
+    outline: 2px solid var(--accent-beige-dark);
+    outline-offset: 3px;
+}
+
 /* ===== Animaties ===== */
 .animate-on-load {
     opacity: 0;
