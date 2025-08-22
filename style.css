@@ -258,6 +258,19 @@ p {
     margin-top: .5rem;
 }
 
+/* Inline mobile-only photo inside Over Mij -> Lees meer */
+.about-inline-photo-mobile {
+    display: none;
+    margin: 1rem 0 1.5rem;
+}
+
+.about-inline-photo-mobile img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .08);
+}
+
 /* ===== Skip link ===== */
 .skip-link {
     position: absolute;
@@ -1104,6 +1117,11 @@ footer {
     /* Show only one photo on mobile: hide the first (IMG_7947) */
     #over-mij .image-content img:first-child {
         display: none;
+    }
+
+    /* Show the inline photo only on mobile */
+    .about-inline-photo-mobile {
+        display: block;
     }
 
     .testimonial-slide {
