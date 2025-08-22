@@ -127,12 +127,14 @@ p {
 /* Werkwijze: intro layout (image left, text right) */
 .werkwijze-intro {
     display: grid;
-    grid-template-columns: 1.05fr 1.2fr;
+    grid-template-columns: 1.2fr 1.1fr;
+    /* image a touch larger */
     grid-template-areas: "media text";
     gap: 2rem;
     align-items: center;
     margin: 0 auto 2.25rem;
-    max-width: 1000px;
+    max-width: 1040px;
+    /* slightly wider for balance with section above */
 }
 
 .werkwijze-intro-media {
