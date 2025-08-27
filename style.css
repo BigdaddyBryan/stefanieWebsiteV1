@@ -1185,19 +1185,6 @@ footer {
     }
 
     #over-mij .image-content {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        margin-top: 2rem;
-        max-width: 350px
-    }
-
-    #over-mij .image-content img:first-child,
-    #over-mij .image-content img:last-child {
-        transform: none
-    }
-
-    /* Show only one photo on mobile: hide the first (IMG_7947) */
-    #over-mij .image-content img:first-child {
         display: none;
     }
 
