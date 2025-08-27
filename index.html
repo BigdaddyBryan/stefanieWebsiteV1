@@ -522,7 +522,8 @@
             Je hoeft het niet alleen te doen. Ik help je graag verder.
           </p>
 
-          <form class="contact-form" action="#" method="post" novalidate>
+          <form name="contact" class="contact-form" method="POST" data-netlify="true">
+            <input type="hidden" name="form-name" value="contact" />
             <div class="form-group">
               <label for="name">Naam</label>
               <input
