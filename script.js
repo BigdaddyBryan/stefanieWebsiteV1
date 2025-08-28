@@ -261,4 +261,74 @@ document.addEventListener("DOMContentLoaded", () => {
       setOpen(!open);
     });
   }
+
+  // ===== Netlify form submission =====
+  (function () {
+    const form = document.getElementById("contact-form");
+    if (!form) return;
+
+    const submitBtn = document.getElementById("contact-submit");
+    const statusEl = document.getElementById("contact-status");
+
+    function setStatus(msg, type = "info") {
+      if (!statusEl) return;
+      statusEl.textContent = msg;
+      statusEl.className = "form-status " + type; // voeg evt. CSS-styling toe
+    }
+
+    function encodeFormData(formEl) {
+      const fd = new FormData(formEl);
+      // Belangrijk: Netlify verwacht form-name in de payload
+      if (!fd.has("form-name"))
+        fd.set("form-name", formEl.getAttribute("name") || "contact");
+      return new URLSearchParams(fd).toString();
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      // Honeypot check
+      const botField = form.querySelector('input[name="bot-field"]');
+      if (botField && botField.value) {
+        // Bot gedetecteerd: doe alsof het gelukt is
+        setStatus("Bedankt! Je bericht is verstuurd.", "success");
+        form.reset();
+        return;
+      }
+
+      try {
+        submitBtn && (submitBtn.disabled = true);
+        setStatus("Bezig met verzenden...", "info");
+
+        const body = encodeFormData(form);
+
+        const res = await fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body,
+        });
+
+        if (res.ok) {
+          setStatus(
+            "Bedankt! Je bericht is verstuurd. Ik neem zo snel mogelijk contact op.",
+            "success"
+          );
+          form.reset();
+        } else {
+          // Netlify kan 200/303 verwachten; behandel non-OK als fout
+          setStatus(
+            "Er ging iets mis bij het versturen. Probeer het later opnieuw of mail naar info@stefaniebergshoeff.nl.",
+            "error"
+          );
+        }
+      } catch (err) {
+        setStatus(
+          "Netwerkfout. Controleer je verbinding of mail naar info@stefaniebergshoeff.nl.",
+          "error"
+        );
+      } finally {
+        submitBtn && (submitBtn.disabled = false);
+      }
+    });
+  })();
 });

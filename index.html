@@ -527,8 +527,21 @@
             class="contact-form"
             method="POST"
             data-netlify="true"
+            netlify-honeypot="bot-field"
+            id="contact-form"
           >
+            <!-- Netlify detection -->
             <input type="hidden" name="form-name" value="contact" />
+
+            <!-- Honeypot (verborgen voor mensen, zichtbaar voor bots) -->
+            <div
+              class="hp-field"
+              aria-hidden="true"
+              style="position: absolute; left: -9999px"
+            >
+              <label>Laat dit veld leeg: <input name="bot-field" /></label>
+            </div>
+
             <div class="form-group">
               <label for="name">Naam</label>
               <input
@@ -558,7 +571,30 @@
                 required
               ></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Verstuur</button>
+            <button type="submit" class="btn btn-primary" id="contact-submit">
+              Verstuur
+            </button>
+
+            <!-- Statusmelding (same-page confirmation) -->
+            <p
+              id="contact-status"
+              class="form-status"
+              aria-live="polite"
+              style="margin-top: 12px"
+            ></p>
+
+            <!-- No-JS fallback -->
+            <noscript>
+              <p>
+                <em
+                  >JavaScript staat uit. Versturen werkt mogelijk niet. Mail
+                  anders naar
+                  <a href="mailto:info@stefaniebergshoeff.nl"
+                    >info@stefaniebergshoeff.nl</a
+                  >.</em
+                >
+              </p>
+            </noscript>
           </form>
 
           <div class="contact-details">
@@ -632,7 +668,7 @@
     </footer>
 
     <a
-      href="https://wa.me/31612345678"
+      href="https://wa.me/31646051805"
       class="whatsapp-fab"
       target="_blank"
       rel="noopener noreferrer"

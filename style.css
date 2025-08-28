@@ -1260,3 +1260,20 @@ footer {
         animation: none !important;
     }
 }
+
+/* ===== Form Status ===== */
+.form-status {
+    font-size: 0.95rem;
+}
+
+.form-status.info {
+    opacity: 0.85;
+}
+
+.form-status.success {
+    color: #137333;
+}
+
+.form-status.error {
+    color: #b3261e;
+}
